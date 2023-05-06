@@ -7,7 +7,7 @@ public class Metrics {
     private Map<String, Double> metMap;
 
     /**
-     * input
+     * takes in a double array to build the metric hashmap
      * @param vals
      */
     public Metrics(Double[] vals) {
@@ -15,9 +15,7 @@ public class Metrics {
             System.err.println("An error occurred. Exiting program.");
             System.exit(1);
         }
-
         metMap = new HashMap<>();
-
         for (int i = 0; i < KEYS.length; ++i) {
             metMap.put(KEYS[i], vals[i]);
         }
@@ -26,9 +24,11 @@ public class Metrics {
     void setMetric(String key, Double val) {
         metMap.put(key, val);
     }
+
     Double getMetric(String key) {
         return metMap.get(key);
     }
+    
     @Override
     public String toString() {
         String ret = "";
