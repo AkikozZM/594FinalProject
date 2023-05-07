@@ -1,9 +1,12 @@
 import java.util.*;
 
 public class Metrics {
-    private static final String[] KEYS = new String[]{"humanDevIdx", "genderDevIdx",
-            "genderInequalityIndx", "blowProvertyPercent", "broadband", "happinessScore",
-            "pollutionIdx", "CO2Emission", "lifeExpectancy"};
+    private static final String[] KEYS = new String[]{"Happiness Ladder Score", "Gender Development Index", "Expected Years of Education",
+            "Freedom to Make Life Choices", " Social Support", "Generosity", "Life Expectancy",
+            "Doctors per 10k people", "Nutritional Deficiencies", "Cancer %", "Diabetes %", "HIV/AIDS and Tuberculosis %",
+            "GDP Per Capita", "GDP Per Capita Growth Rate", "% Living on Less than $30 Per Day", " Internet Speed",
+            "Multi-Dimensional Poverty Index", "Income Inequality", "Air Quality Index", "Pollution Deaths per 100k", " CO2 from Coal",
+            "CO2 from Oil", "CO2 from Gas", "Total CO2 Emissions"};
     private Map<String, Double> metMap;
 
     /**
