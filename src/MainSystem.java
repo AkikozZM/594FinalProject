@@ -1,3 +1,7 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainSystem {
@@ -5,7 +9,17 @@ public class MainSystem {
             "Social Indicators", "Health Indicators", "Economic Indicators"
             , "Pollution Indicators", "Compare Nations", "View List of Countries"
             , "View Ranking Methodology", "Exit"};
-
+    private static final String[] SOCIALINDI = new String[]{"Happiness Ladder Score",
+            "Gender Development Index", "Expected Years of Education", "Freedom to Make Life Choices",
+            "Social Support", "Generosity"};
+    private static final String[] HEALTHINDI = new String[]{"Life Expectancy", "Doctors per 10k people",
+            "Cancer %", "Diabetes %", "HIV/AIDS and Tuberculosis %"};
+    private static final String[] ECONOMICINDI = new String[]{"GDP Per Capita",
+            "GDP Per Capita Growth Rate", "% Living on Less than $30 Per Day", "Internet Speed",
+            "Multi-Dimensional Poverty Index", "Income Inequality"};
+    private static final String[] POLLUTIONINDI = new String[]{"Air Quality Index",
+            "Pollution Deaths per 100k", "CO2 from Coal",
+            "CO2 from Oil", "CO2 from Gas", "Total CO2 Emissions"};
     public static void main(String args[]) throws Exception {
         ImportInfo ii = new ImportInfo();
         ii.parseData();
@@ -68,6 +82,21 @@ public class MainSystem {
             case "1" -> secondMenu("Social");
             case "2" -> secondMenu("Health");
             case "3" -> secondMenu("Economic");
+            case "4" -> secondMenu("Pollution");
         }
     }
+
+    private String displayIndicator(String countryName, int option) {
+        String[] queryTerms = new String[0];
+        Country query = Country.getCountriesData(countryName);
+        switch (option) {
+            case 1 -> queryTerms = SOCIALINDI;
+            case 2 -> queryTerms = HEALTHINDI;
+            case 3 -> queryTerms = ECONOMICINDI;
+            case 4 -> queryTerms = POLLUTIONINDI;
+        }
+        List<Double> values = query.getMetrics((ArrayList<String>) Arrays.asList(queryTerms));
+        return null;
+    }
+
 }

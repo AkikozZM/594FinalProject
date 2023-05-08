@@ -1,8 +1,10 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Country {
-    private static Map<String, Metrics> countriesData = new HashMap<>();
+    private static Map<String, Country> countriesData = new HashMap<>();
     private String countryName;
     private Metrics met;
     public Country(String name, Double[] input) {
@@ -12,13 +14,19 @@ public class Country {
     }
 
     private void addCountry() {
-        countriesData.put(countryName, met);
+        countriesData.put(countryName, this);
     }
 
-    public static Map<String, Metrics> getCountriesData() {
-        return countriesData;
+    public static Country getCountriesData(String countryName) {
+        return countriesData.get(countryName);
     }
-
+    public List<Double> getMetrics(ArrayList<String> queryTerms) {
+        List<Double> ret = new ArrayList<>();
+        for (String query : queryTerms) {
+            ret.add(met.getMetric(query));
+        }
+        return ret;
+    }
     @Override
     public String toString() {
         return countryName + ":\n " + met.toString();
