@@ -6,7 +6,9 @@ public class MainSystem {
             , "Pollution Indicators", "Compare Nations", "View List of Countries"
             , "View Ranking Methodology", "Exit"};
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception {
+        ImportInfo ii = new ImportInfo();
+        ii.parseData();
         Scanner sc = new Scanner(System.in);
         while (true) {
             menuDisplay();

@@ -1,7 +1,8 @@
+import java.util.HashMap;
 import java.util.Map;
 
 public class Country {
-    private static Map<String, Metrics> countriesData;
+    private static Map<String, Metrics> countriesData = new HashMap<>();
     private String countryName;
     private Metrics met;
     public Country(String name, Double[] input) {
