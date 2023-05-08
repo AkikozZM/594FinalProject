@@ -86,7 +86,7 @@ public class MainSystem {
         }
     }
 
-    private String displayIndicator(String countryName, int option) {
+    private List<Double> calcIndicator(String countryName, int option) {
         String[] queryTerms = new String[0];
         Country query = Country.getCountriesData(countryName);
         switch (option) {
@@ -95,8 +95,7 @@ public class MainSystem {
             case 3 -> queryTerms = ECONOMICINDI;
             case 4 -> queryTerms = POLLUTIONINDI;
         }
-        List<Double> values = query.getMetrics(queryTerms);
-        return null;
+        return query.getMetrics(queryTerms);
     }
 
 }
