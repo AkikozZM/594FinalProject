@@ -25,13 +25,14 @@ public class Metrics {
             metMap.put(KEYS[i], vals[i]);
         }
     }
-
+    public static String[] getKeys() { return KEYS;}
     void setMetric(String key, Double val) {
         metMap.put(key, val);
     }
     Double getMetric(String key) {
         return metMap.get(key);
     }
+
     @Override
     public String toString() {
         String ret = "";
