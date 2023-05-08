@@ -13,6 +13,11 @@ public class Country {
     private void addCountry() {
         countriesData.put(countryName, met);
     }
+
+    public static Map<String, Metrics> getCountriesData() {
+        return countriesData;
+    }
+
     @Override
     public String toString() {
         return countryName + ":\n " + met.toString();
