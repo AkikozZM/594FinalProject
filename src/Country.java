@@ -20,7 +20,7 @@ public class Country {
     public static Country getCountriesData(String countryName) {
         return countriesData.get(countryName);
     }
-    public List<Double> getMetrics(ArrayList<String> queryTerms) {
+    public List<Double> getMetrics(String[] queryTerms) {
         List<Double> ret = new ArrayList<>();
         for (String query : queryTerms) {
             ret.add(met.getMetric(query));

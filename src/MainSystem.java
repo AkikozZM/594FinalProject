@@ -95,7 +95,7 @@ public class MainSystem {
             case 3 -> queryTerms = ECONOMICINDI;
             case 4 -> queryTerms = POLLUTIONINDI;
         }
-        List<Double> values = query.getMetrics((ArrayList<String>) Arrays.asList(queryTerms));
+        List<Double> values = query.getMetrics(queryTerms);
         return null;
     }
 
