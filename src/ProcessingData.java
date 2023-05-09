@@ -12,7 +12,7 @@ public class ProcessingData {
             "Gender Development Index", "Expected Years of Education", "Freedom to Make Life Choices",
             "Social Support", "Generosity"};
     private static final String[] HEALTHINDI = new String[]{"Life Expectancy", "Doctors per 10k people",
-            "Cancer %", "Diabetes %", "HIV/AIDS and Tuberculosis %"};
+            "Cancer %", "Diabetes %", "HIV/AIDS and Tuberculosis %", "Nutritional Deficiencies"};
     private static final String[] ECONOMICINDI = new String[]{"GDP Per Capita",
             "GDP Per Capita Growth Rate", "% Living on Less than $30 Per Day", "Internet Speed",
             "Multi-Dimensional Poverty Index", "Income Inequality"};
