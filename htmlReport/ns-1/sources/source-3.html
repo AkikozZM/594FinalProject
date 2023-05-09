@@ -1,0 +1,852 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Comparison</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: Comparison (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Comparison</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (12/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.4%
+  </span>
+  <span class="absValue">
+    (21/128)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Comparison$EconomicComparison</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (7/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.5%
+  </span>
+  <span class="absValue">
+    (13/17)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Comparison$HealthComparison</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (7/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.5%
+  </span>
+  <span class="absValue">
+    (13/17)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Comparison$PollutionComparison</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (7/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.5%
+  </span>
+  <span class="absValue">
+    (13/17)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Comparison$SocialComparison</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (7/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.5%
+  </span>
+  <span class="absValue">
+    (13/17)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    81.6%
+  </span>
+  <span class="absValue">
+    (40/49)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.2%
+  </span>
+  <span class="absValue">
+    (73/196)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import java.math.BigDecimal;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * Comparison class used to compare statistics between two countries / vertices in the
+&nbsp; * comparison graph. Stores information on social, health, economic, and pollution differentials.
+&nbsp; */
+&nbsp;public class Comparison {
+<b class="fc">&nbsp;    private static Comparison[][] countryComparisons = new Comparison[195][195];</b>
+<b class="fc">&nbsp;    private static Map&lt;String, Integer&gt; countryIndices = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Social comparison statistics for the two countries representing this edge.
+&nbsp;     */
+&nbsp;    private SocialComparison social;
+&nbsp;    /**
+&nbsp;     * Health comparison statistics for the two countries representing this edge.
+&nbsp;     */
+&nbsp;    private HealthComparison health;
+&nbsp;    /**
+&nbsp;     * Economic comparison statistics for the two countries representing this edge.
+&nbsp;     */
+&nbsp;    private EconomicComparison economic;
+&nbsp;    /**
+&nbsp;     * Pollution comparison statistics for the two countries representing this edge.
+&nbsp;     */
+&nbsp;    private PollutionComparison pollution;
+&nbsp;    /**
+&nbsp;     * The total cumulative comparison value for the two countries representing this edge.
+&nbsp;     * Value represents comparisons made across each individual category and data points.
+&nbsp;     */
+&nbsp;    private Double cumulativeComparison;
+&nbsp;
+<b class="fc">&nbsp;    private static final String[] SOCIALINDI = new String[]{&quot;Happiness Ladder Score&quot;,</b>
+&nbsp;            &quot;Gender Development Index&quot;, &quot;Expected Years of Education&quot;, &quot;Freedom to Make Life Choices&quot;,
+&nbsp;            &quot;Social Support&quot;, &quot;Generosity&quot;};
+<b class="fc">&nbsp;    private static final String[] HEALTHINDI = new String[]{&quot;Life Expectancy&quot;, &quot;Doctors per 10k people&quot;,</b>
+&nbsp;            &quot;Cancer %&quot;, &quot;Diabetes %&quot;, &quot;HIV/AIDS and Tuberculosis %&quot;, &quot;Nutritional Deficiencies&quot;};
+<b class="fc">&nbsp;    private static final String[] ECONOMICINDI = new String[]{&quot;GDP Per Capita&quot;,</b>
+&nbsp;            &quot;GDP Per Capita Growth Rate&quot;, &quot;% Living on Less than $30 Per Day&quot;, &quot;Internet Speed&quot;,
+&nbsp;            &quot;Multi-Dimensional Poverty Index&quot;, &quot;Income Inequality&quot;};
+<b class="fc">&nbsp;    private static final String[] POLLUTIONINDI = new String[]{&quot;Air Quality Index&quot;,</b>
+&nbsp;            &quot;Pollution Deaths per 100k&quot;, &quot;CO2 from Coal&quot;,
+&nbsp;            &quot;CO2 from Oil&quot;, &quot;CO2 from Gas&quot;, &quot;Total CO2 Emissions&quot;};
+&nbsp;
+<b class="fc">&nbsp;    public Comparison() {</b>
+<b class="fc">&nbsp;        int index = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (String name : Country.getCountriesMap().keySet()) {</b>
+<b class="nc">&nbsp;            countryIndices.put(name.toLowerCase(),index);</b>
+<b class="nc">&nbsp;            index++;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Stores social indicator comparison statistics between two countries.
+&nbsp;     */
+&nbsp;    public static class SocialComparison {
+&nbsp;        private Double happiness;  // Happiness comparison value.
+&nbsp;        private Double genderDevelopmentIndex;  // GDI comparison value.
+&nbsp;        private Double yearsOfEducation;  // Years of education comparison value.
+&nbsp;        private Double freedomLifeChoices;  // Freedom to make life choices comparison value.
+&nbsp;        private Double socialSupport;  // Social support comparison value.
+&nbsp;        private Double generosity;  // Generosity comparison value.
+&nbsp;        private Double aggregateComparison;  // The aggregate comparison value for these indicators.
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructor for the SocialComparison class.
+&nbsp;         * @param happiness  Happiness comparison value.
+&nbsp;         * @param gender  GDI comparison value.
+&nbsp;         * @param education  Years of education comparison value.
+&nbsp;         * @param freedom  Freedom to make life choices comparison value.
+&nbsp;         * @param socialSupport  Social support comparison value.
+&nbsp;         * @param generosity  Generosity comparison value.
+&nbsp;         */
+&nbsp;        public SocialComparison(Double happiness, Double gender, Double education, Double freedom,
+<b class="fc">&nbsp;                                Double socialSupport, Double generosity) {</b>
+<b class="fc">&nbsp;            this.happiness = happiness;</b>
+<b class="fc">&nbsp;            this.genderDevelopmentIndex = gender;</b>
+<b class="fc">&nbsp;            this.yearsOfEducation = education;</b>
+<b class="fc">&nbsp;            this.freedomLifeChoices = freedom;</b>
+<b class="fc">&nbsp;            this.socialSupport = socialSupport;</b>
+<b class="fc">&nbsp;            this.generosity = generosity;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for happiness value.
+&nbsp;         * @return  happiness comparison value.
+&nbsp;         */
+&nbsp;        public Double getHappiness() {
+<b class="fc">&nbsp;            return happiness;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for GDP comparison value.
+&nbsp;         * @return  The GDP comparison value.
+&nbsp;         */
+&nbsp;        public Double getGenderDevelopmentIndex() {
+<b class="fc">&nbsp;            return genderDevelopmentIndex;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for yearsOfEducation value.
+&nbsp;         * @return  yearsOfEducation comparison value.
+&nbsp;         */
+&nbsp;        public Double getYearsOfEducation() {
+<b class="fc">&nbsp;            return yearsOfEducation;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for freedom to make life choices comparison.
+&nbsp;         * @return  freedomLifeChoices comparison value.
+&nbsp;         */
+&nbsp;        public Double getFreedomLifeChoices() {
+<b class="fc">&nbsp;            return freedomLifeChoices;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for social support comparison value.
+&nbsp;         * @return  socialSupport comparison value.
+&nbsp;         */
+&nbsp;        public Double getSocialSupport() {
+<b class="fc">&nbsp;            return socialSupport;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for generosity comparison value.
+&nbsp;         * @return  generosity comparison value.
+&nbsp;         */
+&nbsp;        public Double getGenerosity() {
+<b class="fc">&nbsp;            return generosity;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for aggregate comparison.
+&nbsp;         * @return The aggregate comparison value.
+&nbsp;         */
+&nbsp;        public Double getAggregateComparison() {
+<b class="nc">&nbsp;            return aggregateComparison;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Calculates the aggregate comparison value.
+&nbsp;         */
+&nbsp;        public void setAggregateComparison() {
+<b class="nc">&nbsp;            BigDecimal bd = new BigDecimal((this.socialSupport + this.generosity + this.happiness +</b>
+<b class="nc">&nbsp;                    this.freedomLifeChoices + this.yearsOfEducation + this.genderDevelopmentIndex) / 6);</b>
+<b class="nc">&nbsp;            this.aggregateComparison = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Stores health indicator comparison statistics between two countries.
+&nbsp;     */
+&nbsp;    public static class HealthComparison {
+&nbsp;        private Double lifeExpectancy;  // Life expectancy comparison value.
+&nbsp;        private Double doctors;  // Doctors per 10,000 people comparison value.
+&nbsp;        private Double nutrition;  // Nutritional deficiencies comparison value.
+&nbsp;        private Double cancerRate;  // Cancer rate comparison value.
+&nbsp;        private Double diabetesRate;  // Diabetes comparison value.
+&nbsp;        private Double hivAidsTuberculosisRate;  // HIV, AIDs, and Tuberculosis comparison value.
+&nbsp;        private Double aggregateComparison;  // The aggregate comparison value for these indicators.
+&nbsp;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructor for the HealthComparison class.
+&nbsp;         * @param lifeExpectancy  Life expectancy comparison value.
+&nbsp;         * @param doctors  Doctors per 10,000 people comparison value.
+&nbsp;         * @param nutrition  Nutritional deficiencies comparison value.
+&nbsp;         * @param cancerRate  Cancer rate comparison value.
+&nbsp;         * @param diabetesRate  Diabetes rate comparison value.
+&nbsp;         * @param hivAidsTuberculosisRates  HIV, AIDs, and Tuberculosis comparison value.
+&nbsp;         */
+&nbsp;        public HealthComparison(Double lifeExpectancy, Double doctors, Double nutrition, Double cancerRate,
+<b class="fc">&nbsp;                                Double diabetesRate, Double hivAidsTuberculosisRates) {</b>
+<b class="fc">&nbsp;            this.lifeExpectancy = lifeExpectancy;</b>
+<b class="fc">&nbsp;            this.doctors = doctors;</b>
+<b class="fc">&nbsp;            this.nutrition = nutrition;</b>
+<b class="fc">&nbsp;            this.cancerRate = cancerRate;</b>
+<b class="fc">&nbsp;            this.diabetesRate = diabetesRate;</b>
+<b class="fc">&nbsp;            this.hivAidsTuberculosisRate = hivAidsTuberculosisRates;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for life expectancy comparison value.
+&nbsp;         * @return  lifeExpectancy comparison value.
+&nbsp;         */
+&nbsp;        public Double getLifeExpectancy() {
+<b class="fc">&nbsp;            return lifeExpectancy;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for doctors per 10k people comparison value.
+&nbsp;         * @return doctors comparison value.
+&nbsp;         */
+&nbsp;        public Double getDoctors() {
+<b class="fc">&nbsp;            return doctors;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for nutrional deficiencies comparison value.
+&nbsp;         * @return
+&nbsp;         */
+&nbsp;        public Double getNutrition() {
+<b class="fc">&nbsp;            return nutrition;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for cancer rate comparison value.
+&nbsp;         * @return cancerRate comparison value.
+&nbsp;         */
+&nbsp;        public Double getCancerRate() {
+<b class="fc">&nbsp;            return cancerRate;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for diabetes comparison value.
+&nbsp;         * @return Getter for diabetes rate comparison value.
+&nbsp;         */
+&nbsp;        public Double getDiabetesRate() {
+<b class="fc">&nbsp;            return diabetesRate;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for HIV, AIDs, and Tuberculosis rate comparison value.
+&nbsp;         * @return hivAIDsTuberculosis comparison value.
+&nbsp;         */
+&nbsp;        public Double getHivAidsTuberculosisRate() {
+<b class="fc">&nbsp;            return hivAidsTuberculosisRate;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for aggregate comparison.
+&nbsp;         * @return The aggregate comparison value.
+&nbsp;         */
+&nbsp;        public Double getAggregateComparison() {
+<b class="nc">&nbsp;            return aggregateComparison;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Calculates the aggregate comparison value.
+&nbsp;         */
+&nbsp;        public void setAggregateComparison() {
+<b class="nc">&nbsp;            BigDecimal bd = new BigDecimal((this.cancerRate + this.diabetesRate + this.hivAidsTuberculosisRate</b>
+<b class="nc">&nbsp;                    + this.doctors + this.lifeExpectancy + this.nutrition) / 6);</b>
+<b class="nc">&nbsp;            this.aggregateComparison = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Stores economic indicator comparison statistics between two countries.
+&nbsp;     */
+&nbsp;    public static class EconomicComparison {
+&nbsp;        private Double gdpPerCapita;  // GDP per capita comparison value.
+&nbsp;        private Double growthRate;  // GDP per capita growth rate comparison value.
+&nbsp;        private Double lessThan$30Rate;  // Percent living on less than $30 per day poverty comparison value.
+&nbsp;        private Double internetSpeed;  // Internet speed comparison value.
+&nbsp;        private Double multidimensionalPoverty;  // Multidimensional poverty comparison value.
+&nbsp;        private Double incomeInequality;  // Income inequality comparison value.
+&nbsp;        private Double aggregateComparison;  // The aggregate comparison value for these indicators.
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructor for the EconomicComparison class.
+&nbsp;         * @param gdpPerCapita  GDP per capita comparison value.
+&nbsp;         * @param growthRate  GDP per capita growth rate comparison value.
+&nbsp;         * @param lessThan$30Rate  Percent living on less than $30 per day poverty comparison value.
+&nbsp;         * @param internetSpeed  Internet speed comparison value.
+&nbsp;         * @param multidimensionalPoverty  Multidimensional poverty comparison value.
+&nbsp;         * @param incomeInequality  Income inequality comparison value.
+&nbsp;         */
+&nbsp;        public EconomicComparison(Double gdpPerCapita, Double growthRate, Double lessThan$30Rate,
+&nbsp;                                  Double internetSpeed, Double multidimensionalPoverty,
+<b class="fc">&nbsp;                                  Double incomeInequality) {</b>
+<b class="fc">&nbsp;            this.gdpPerCapita = gdpPerCapita;</b>
+<b class="fc">&nbsp;            this.growthRate = growthRate;</b>
+<b class="fc">&nbsp;            this.lessThan$30Rate = lessThan$30Rate;</b>
+<b class="fc">&nbsp;            this.internetSpeed = internetSpeed;</b>
+<b class="fc">&nbsp;            this.multidimensionalPoverty = multidimensionalPoverty;</b>
+<b class="fc">&nbsp;            this.incomeInequality = incomeInequality;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for gdp per capita comparison.
+&nbsp;         * @return  The gdp per capita comparison value.
+&nbsp;         */
+&nbsp;        public Double getGdpPerCapita() {
+<b class="fc">&nbsp;            return gdpPerCapita;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for gdp per capita growth rate comparison.
+&nbsp;         * @return growthRate comparison value.
+&nbsp;         */
+&nbsp;        public Double getGrowthRate() {
+<b class="fc">&nbsp;            return growthRate;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for percent living on less than $30 per day comparison.
+&nbsp;         * @return  lessThan$30Rate comparison value.
+&nbsp;         */
+&nbsp;        public Double getLessThan$30Rate() {
+<b class="fc">&nbsp;            return lessThan$30Rate;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for internet speed comparison.
+&nbsp;         * @return internetSpeed comparison value.
+&nbsp;         */
+&nbsp;        public Double getInternetSpeed() {
+<b class="fc">&nbsp;            return internetSpeed;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for multidimensional poverty comparison.
+&nbsp;         * @return multidimensionalPoverty comparison value.
+&nbsp;         */
+&nbsp;        public Double getMultidimensionalPoverty() {
+<b class="fc">&nbsp;            return multidimensionalPoverty;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for income inequality comparison.
+&nbsp;         * @return incomeInequality comparison value.
+&nbsp;         */
+&nbsp;        public Double getIncomeInequality() {
+<b class="fc">&nbsp;            return incomeInequality;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for aggregate comparison.
+&nbsp;         * @return The aggregate comparison value.
+&nbsp;         */
+&nbsp;        public Double getAggregateComparison() {
+<b class="nc">&nbsp;            return aggregateComparison;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Calculates the aggregate comparison value.
+&nbsp;         */
+&nbsp;        public void setAggregateComparison() {
+<b class="nc">&nbsp;            BigDecimal bd = new BigDecimal((this.gdpPerCapita + this.incomeInequality + this.internetSpeed</b>
+<b class="nc">&nbsp;                    + this.growthRate + this.multidimensionalPoverty + this.lessThan$30Rate) / 6);</b>
+<b class="nc">&nbsp;            this.aggregateComparison = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Stores pollution indicator comparison statistics between two countries.
+&nbsp;     */
+&nbsp;    public static class PollutionComparison {
+&nbsp;        private Double aqi;  // Air Quality Index comparison value.
+&nbsp;        private Double deathsPer100k;  // Deaths due to pollution per 100k people comparison value.
+&nbsp;        private Double coalCO2;  // CO2 from coal comparison value.
+&nbsp;        private Double oilCO2;  // CO2 from oil comparison value.
+&nbsp;        private Double gasCO2;  // CO2 from gas comparison value.
+&nbsp;        private Double totalEmissions;  // Total CO2 emissions comparison value.
+&nbsp;        private Double aggregateComparison;  // The aggregate comparison value for these indicators.
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructor for the PollutionComparison class.
+&nbsp;         * @param aqi  Air Quality Index comparison value.
+&nbsp;         * @param deathsPer100k  Deaths due to pollution per 100k people comparison value.
+&nbsp;         * @param coalCO2  CO2 from coal comparison value.
+&nbsp;         * @param oilCO2  CO2 from oil comparison value.
+&nbsp;         * @param gasCO2  CO2 from gas comparison value.
+&nbsp;         * @param totalEmissions  Total CO2 emissions comparison value.
+&nbsp;         */
+&nbsp;        public PollutionComparison(Double aqi, Double deathsPer100k, Double coalCO2, Double oilCO2,
+<b class="fc">&nbsp;                                   Double gasCO2, Double totalEmissions) {</b>
+<b class="fc">&nbsp;            this.aqi = aqi;</b>
+<b class="fc">&nbsp;            this.deathsPer100k = deathsPer100k;</b>
+<b class="fc">&nbsp;            this.coalCO2 = coalCO2;</b>
+<b class="fc">&nbsp;            this.oilCO2 = oilCO2;</b>
+<b class="fc">&nbsp;            this.gasCO2 = gasCO2;</b>
+<b class="fc">&nbsp;            this.totalEmissions = totalEmissions;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for AQI comparison.
+&nbsp;         * @return  aqi comparison value.
+&nbsp;         */
+&nbsp;        public Double getAqi() {
+<b class="fc">&nbsp;            return aqi;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for deathsPer100k
+&nbsp;         * @return deathsPer100k comparison value.
+&nbsp;         */
+&nbsp;        public Double getDeathsPer100k() {
+<b class="fc">&nbsp;            return deathsPer100k;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for coalCO2.
+&nbsp;         * @return  coalCO2 comparison value.
+&nbsp;         */
+&nbsp;        public Double getCoalCO2() {
+<b class="fc">&nbsp;            return coalCO2;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for oilCO2.
+&nbsp;         * @return oilCO2 comparison value.
+&nbsp;         */
+&nbsp;        public Double getOilCO2() {
+<b class="fc">&nbsp;            return oilCO2;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for gasCO2.
+&nbsp;         * @return  gasCO2 comparison value.
+&nbsp;         */
+&nbsp;        public Double getGasCO2() {
+<b class="fc">&nbsp;            return gasCO2;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for total emissions.
+&nbsp;         * @return  The total emissions comparison value.
+&nbsp;         */
+&nbsp;        public Double getTotalEmissions() {
+<b class="fc">&nbsp;            return totalEmissions;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Getter for aggregate comparison.
+&nbsp;         * @return The aggregate comparison value.
+&nbsp;         */
+&nbsp;        public Double getAggregateComparison() {
+<b class="nc">&nbsp;            return aggregateComparison;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Calculates the aggregate comparison value.
+&nbsp;         */
+&nbsp;        public void setAggregateComparison() {
+<b class="nc">&nbsp;            BigDecimal bd = new BigDecimal((this.aqi + this.totalEmissions + this.gasCO2 + this.oilCO2</b>
+<b class="nc">&nbsp;                    + this.deathsPer100k + this.coalCO2) / 6);</b>
+<b class="nc">&nbsp;            this.aggregateComparison = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Setter for social comparison.
+&nbsp;     * @param social  The new comparison value.
+&nbsp;     */
+&nbsp;    public void setSocial(SocialComparison social) {
+<b class="fc">&nbsp;        this.social = social;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Getter for social comparison.
+&nbsp;     * @return  The social comparison.
+&nbsp;     */
+&nbsp;    public SocialComparison getSocial() {
+<b class="fc">&nbsp;        return this.social;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Setter for health comparison.
+&nbsp;     * @param health  The comparison value.
+&nbsp;     */
+&nbsp;    public void setHealth(HealthComparison health) {
+<b class="fc">&nbsp;        this.health = health;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Getter for health comparison.
+&nbsp;     * @return  The new comparison value.
+&nbsp;     */
+&nbsp;    public HealthComparison getHealth() {
+<b class="fc">&nbsp;        return this.health;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Setter for the economic comparison.
+&nbsp;     * @param economic  The new comparison value.
+&nbsp;     */
+&nbsp;    public void setEconomic(EconomicComparison economic) {
+<b class="fc">&nbsp;        this.economic = economic;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Getter for economic comparison.
+&nbsp;     * @return  The economic comparison.
+&nbsp;     */
+&nbsp;    public EconomicComparison getEconomic() {
+<b class="fc">&nbsp;        return this.economic;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Setter for pollution comparison.
+&nbsp;     * @param pollution  The pollution comparison.
+&nbsp;     */
+&nbsp;    public void setPollution(PollutionComparison pollution) {
+<b class="fc">&nbsp;        this.pollution = pollution;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Getter for pollution comparison.
+&nbsp;     * @return  Pollution comparison.
+&nbsp;     */
+&nbsp;    public PollutionComparison getPollution() {
+<b class="fc">&nbsp;        return this.pollution;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Setter for total comparison.
+&nbsp;     */
+&nbsp;    public void setCumulativeComparison() {
+<b class="nc">&nbsp;        BigDecimal bd = new BigDecimal((this.pollution.aggregateComparison + this.economic.aggregateComparison</b>
+<b class="nc">&nbsp;                + this.social.aggregateComparison + this.health.aggregateComparison) / 6);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.cumulativeComparison = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Getter for total comparison value.
+&nbsp;     * @return Cumulative comparison value.
+&nbsp;     */
+&nbsp;    public Double getCumulativeComparison() {
+<b class="fc">&nbsp;        return this.cumulativeComparison;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Comparison generateComparison(String firstCountry, String secondCountry) {
+<b class="fc">&nbsp;        Comparison comp = new Comparison();  // Stores the new comparison.</b>
+&nbsp;        Double firstVal;  // First metric comparison value.
+&nbsp;        Double secondVal;  // Second metric comparison value.
+&nbsp;        Double thirdVal;  // Third metric comparison value.
+&nbsp;        Double fourthVal;  // Fourth metric comparison value.
+&nbsp;        Double fifthVal;  // Fifth metric comparison value.
+&nbsp;        Double sixthVal;  // Sixth metric comparison value.
+&nbsp;        Double[] queryFirst;  // Values in specific category for first country;
+&nbsp;        Double[] querySecond;  // Values in specific category for second country;
+&nbsp;        BigDecimal bd;  // For rounding.
+&nbsp;
+<b class="fc">&nbsp;        if (!countryIndices.containsKey(firstCountry.toLowerCase())</b>
+<b class="nc">&nbsp;                || !countryIndices.containsKey(secondCountry.toLowerCase())) {</b>
+<b class="fc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        } else if (countryComparisons[countryIndices.get(firstCountry.toLowerCase())]</b>
+<b class="nc">&nbsp;                [countryIndices.get(secondCountry.toLowerCase())] != null) {</b>
+<b class="nc">&nbsp;            return countryComparisons[countryIndices.get(firstCountry.toLowerCase())]</b>
+<b class="nc">&nbsp;                    [countryIndices.get(secondCountry.toLowerCase())];</b>
+<b class="nc">&nbsp;        } else if (firstCountry.toLowerCase().equals(secondCountry.toLowerCase())) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Calculate social comparisons.
+<b class="nc">&nbsp;        queryFirst = Country.getCountriesData(firstCountry).getMetrics(SOCIALINDI);</b>
+<b class="nc">&nbsp;        querySecond = Country.getCountriesData(secondCountry).getMetrics(SOCIALINDI);</b>
+&nbsp;
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[0] - querySecond[0])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[0] + querySecond[0]) / 2)));</b>
+<b class="nc">&nbsp;        firstVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[1] - querySecond[1])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[1] + querySecond[1]) / 2)));</b>
+<b class="nc">&nbsp;        secondVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[2] - querySecond[2])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[2] + querySecond[2]) / 2)));</b>
+<b class="nc">&nbsp;        thirdVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[3] - querySecond[3])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[3] + querySecond[3]) / 2)));</b>
+<b class="nc">&nbsp;        fourthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[4] - querySecond[4])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[4] + querySecond[4]) / 2)));</b>
+<b class="nc">&nbsp;        fifthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[5] - querySecond[5])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[5] + querySecond[5]) / 2)));</b>
+<b class="nc">&nbsp;        sixthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+&nbsp;
+<b class="nc">&nbsp;        comp.social = new SocialComparison(firstVal, secondVal, thirdVal, fourthVal, fifthVal, sixthVal);</b>
+<b class="nc">&nbsp;        comp.social.setAggregateComparison();</b>
+&nbsp;
+&nbsp;        // Calculate health comparisons.
+<b class="nc">&nbsp;        queryFirst = Country.getCountriesData(firstCountry).getMetrics(HEALTHINDI);</b>
+<b class="nc">&nbsp;        querySecond = Country.getCountriesData(secondCountry).getMetrics(HEALTHINDI);</b>
+&nbsp;
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[0] - querySecond[0])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[0] + querySecond[0]) / 2)));</b>
+<b class="nc">&nbsp;        firstVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[1] - querySecond[1])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[1] + querySecond[1]) / 2)));</b>
+<b class="nc">&nbsp;        secondVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[2] - querySecond[2])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[2] + querySecond[2]) / 2)));</b>
+<b class="nc">&nbsp;        thirdVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[3] - querySecond[3])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[3] + querySecond[3]) / 2)));</b>
+<b class="nc">&nbsp;        fourthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[4] - querySecond[4])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[4] + querySecond[4]) / 2)));</b>
+<b class="nc">&nbsp;        fifthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[5] - querySecond[5])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[5] + querySecond[5]) / 2)));</b>
+<b class="nc">&nbsp;        sixthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+&nbsp;
+<b class="nc">&nbsp;        comp.health = new HealthComparison(firstVal, secondVal, thirdVal, fourthVal, fifthVal, sixthVal);</b>
+<b class="nc">&nbsp;        comp.health.setAggregateComparison();</b>
+&nbsp;
+&nbsp;        // Calculate economic comparisons.
+<b class="nc">&nbsp;        queryFirst = Country.getCountriesData(firstCountry).getMetrics(ECONOMICINDI);</b>
+<b class="nc">&nbsp;        querySecond = Country.getCountriesData(secondCountry).getMetrics(ECONOMICINDI);</b>
+&nbsp;
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[0] - querySecond[0])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[0] + querySecond[0]) / 2)));</b>
+<b class="nc">&nbsp;        firstVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[1] - querySecond[1])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[1] + querySecond[1]) / 2)));</b>
+<b class="nc">&nbsp;        secondVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[2] - querySecond[2])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[2] + querySecond[2]) / 2)));</b>
+<b class="nc">&nbsp;        thirdVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[3] - querySecond[3])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[3] + querySecond[3]) / 2)));</b>
+<b class="nc">&nbsp;        fourthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[4] - querySecond[4])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[4] + querySecond[4]) / 2)));</b>
+<b class="nc">&nbsp;        fifthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[5] - querySecond[5])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[5] + querySecond[5]) / 2)));</b>
+<b class="nc">&nbsp;        sixthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+&nbsp;
+<b class="nc">&nbsp;        comp.economic = new EconomicComparison(firstVal, secondVal, thirdVal, fourthVal, fifthVal, sixthVal);</b>
+<b class="nc">&nbsp;        comp.economic.setAggregateComparison();</b>
+&nbsp;
+&nbsp;        // Calculates pollution comparisons.
+<b class="nc">&nbsp;        queryFirst = Country.getCountriesData(firstCountry).getMetrics(POLLUTIONINDI);</b>
+<b class="nc">&nbsp;        querySecond = Country.getCountriesData(secondCountry).getMetrics(POLLUTIONINDI);</b>
+&nbsp;
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[0] - querySecond[0])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[0] + querySecond[0]) / 2)));</b>
+<b class="nc">&nbsp;        firstVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[1] - querySecond[1])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[1] + querySecond[1]) / 2)));</b>
+<b class="nc">&nbsp;        secondVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[2] - querySecond[2])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[2] + querySecond[2]) / 2)));</b>
+<b class="nc">&nbsp;        thirdVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[3] - querySecond[3])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[3] + querySecond[3]) / 2)));</b>
+<b class="nc">&nbsp;        fourthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[4] - querySecond[4])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[4] + querySecond[4]) / 2)));</b>
+<b class="nc">&nbsp;        fifthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+<b class="nc">&nbsp;        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[5] - querySecond[5])) /</b>
+<b class="nc">&nbsp;                ((queryFirst[5] + querySecond[5]) / 2)));</b>
+<b class="nc">&nbsp;        sixthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();</b>
+&nbsp;
+<b class="nc">&nbsp;        comp.pollution = new PollutionComparison(firstVal, secondVal, thirdVal, fourthVal, fifthVal, sixthVal);</b>
+<b class="nc">&nbsp;        comp.pollution.setAggregateComparison();</b>
+<b class="nc">&nbsp;        comp.setCumulativeComparison();</b>
+&nbsp;
+<b class="nc">&nbsp;        countryComparisons[countryIndices.get(firstCountry.toLowerCase())]</b>
+<b class="nc">&nbsp;                [countryIndices.get(secondCountry.toLowerCase())] = comp;</b>
+&nbsp;
+<b class="nc">&nbsp;        countryComparisons[countryIndices.get(secondCountry.toLowerCase())]</b>
+<b class="nc">&nbsp;                [countryIndices.get(firstCountry.toLowerCase())] = comp;</b>
+&nbsp;
+<b class="nc">&nbsp;        return comp;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-09 11:01</div>
+</div>
+</body>
+</html>

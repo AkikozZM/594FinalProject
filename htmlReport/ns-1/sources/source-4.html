@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ComparisonTest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: ComparisonTest (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ComparisonTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (44/44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import org.junit.Test;
+&nbsp;
+&nbsp;import static org.junit.Assert.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Test class for Comparison.
+&nbsp; */
+<b class="fc">&nbsp;public class ComparisonTest {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * General test for Comparison constructors and data retrieval.
+&nbsp;     */
+&nbsp;    @Test
+&nbsp;    public void comparisonConstructorsTest() {
+<b class="fc">&nbsp;        Comparison comp = new Comparison();</b>
+&nbsp;        Comparison.SocialComparison sc;
+&nbsp;        Comparison.HealthComparison hc;
+&nbsp;        Comparison.EconomicComparison ec;
+&nbsp;        Comparison.PollutionComparison pc;
+&nbsp;
+<b class="fc">&nbsp;        assertNull(comp.getSocial());</b>
+<b class="fc">&nbsp;        assertNull(comp.getHealth());</b>
+<b class="fc">&nbsp;        assertNull(comp.getEconomic());</b>
+<b class="fc">&nbsp;        assertNull(comp.getPollution());</b>
+<b class="fc">&nbsp;        assertNull(comp.getCumulativeComparison());</b>
+&nbsp;
+<b class="fc">&nbsp;        sc = new Comparison.SocialComparison(0.1, 0.11, 0.12,</b>
+<b class="fc">&nbsp;                0.13, 0.14, 0.15);</b>
+<b class="fc">&nbsp;        hc = new Comparison.HealthComparison(0.2, 0.21, 0.22, 0.23,</b>
+<b class="fc">&nbsp;                0.24, 0.25);</b>
+<b class="fc">&nbsp;        ec = new Comparison.EconomicComparison(0.3, 0.31, 0.32,</b>
+<b class="fc">&nbsp;                0.33, 0.34, 0.35);</b>
+<b class="fc">&nbsp;        pc = new Comparison.PollutionComparison(0.4, 0.41, 0.42, 0.43,</b>
+<b class="fc">&nbsp;                0.44, 0.45);</b>
+&nbsp;
+<b class="fc">&nbsp;        comp.setSocial(sc);</b>
+<b class="fc">&nbsp;        comp.setHealth(hc);</b>
+<b class="fc">&nbsp;        comp.setEconomic(ec);</b>
+<b class="fc">&nbsp;        comp.setPollution(pc);</b>
+<b class="fc">&nbsp;        comp.generateComparison(&quot;norway&quot;, &quot;sweden&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        assertEquals(0.4, comp.getPollution().getAqi(),0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.41, comp.getPollution().getDeathsPer100k(),0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.42, comp.getPollution().getCoalCO2(),0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.43, comp.getPollution().getOilCO2(),0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.44, comp.getPollution().getGasCO2(),0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.45, comp.getPollution().getTotalEmissions(),0.00000001);</b>
+&nbsp;
+<b class="fc">&nbsp;        assertEquals(0.3, comp.getEconomic().getGdpPerCapita(), 0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.31, comp.getEconomic().getGrowthRate(), 0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.32, comp.getEconomic().getLessThan$30Rate(), 0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.33, comp.getEconomic().getInternetSpeed(), 0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.34, comp.getEconomic().getMultidimensionalPoverty(), 0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.35, comp.getEconomic().getIncomeInequality(), 0.00000001);</b>
+&nbsp;
+<b class="fc">&nbsp;        assertEquals(0.2, comp.getHealth().getLifeExpectancy(), 0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.21, comp.getHealth().getDoctors(), 0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.22, comp.getHealth().getNutrition(),0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.23, comp.getHealth().getCancerRate(), 0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.24, comp.getHealth().getDiabetesRate(), 0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.25, comp.getHealth().getHivAidsTuberculosisRate(),0.00000001);</b>
+&nbsp;
+<b class="fc">&nbsp;        assertEquals(0.1, comp.getSocial().getHappiness(),0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.11, comp.getSocial().getGenderDevelopmentIndex(), 0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.12, comp.getSocial().getYearsOfEducation(), 0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.13, comp.getSocial().getFreedomLifeChoices(), 0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.14, comp.getSocial().getSocialSupport(), 0.00000001);</b>
+<b class="fc">&nbsp;        assertEquals(0.15, comp.getSocial().getGenerosity(), 0.00000001);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void generateComparisonTest() {
+&nbsp;        ImportInfo ii = new ImportInfo();
+&nbsp;        Menu mn = new Menu();
+&nbsp;        try {
+&nbsp;            ii.parseData();
+&nbsp;        } catch (Exception e) {
+&nbsp;            throw new RuntimeException(e);
+&nbsp;        }
+&nbsp;        Comparison comp = new Comparison();
+&nbsp;        Comparison temp = comp.generateComparison(&quot;Norway&quot;, &quot;Sweden&quot;);
+&nbsp;        temp.setCumulativeComparison();
+&nbsp;
+&nbsp;        assertNotNull(temp);
+&nbsp;        assertTrue(temp.getCumulativeComparison() &gt; 0);
+&nbsp;        assertTrue(temp.getPollution().getTotalEmissions() &gt; 0);
+&nbsp;        assertTrue(temp.getPollution().getAggregateComparison() &gt; 0);
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-09 11:01</div>
+</div>
+</body>
+</html>

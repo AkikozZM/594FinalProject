@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > MainSystem</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: MainSystem (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MainSystem</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/43)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import java.lang.reflect.Array;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Scanner;
+&nbsp;
+<b class="nc">&nbsp;public class MainSystem {</b>
+&nbsp;
+&nbsp;    public static void main(String args[]) throws Exception {
+<b class="nc">&nbsp;        ImportInfo ii = new ImportInfo();</b>
+<b class="nc">&nbsp;        Menu mn = new Menu();</b>
+<b class="nc">&nbsp;        ii.parseData();</b>
+<b class="nc">&nbsp;        Scanner sc = new Scanner(System.in);</b>
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            mn.menuDisplay();</b>
+<b class="nc">&nbsp;            String input = mn.getUserInput(sc);</b>
+<b class="nc">&nbsp;            mn.mainMenuSwitch(input);</b>
+&nbsp;            // get number of option:
+<b class="nc">&nbsp;            int i = Integer.parseInt(input);</b>
+<b class="nc">&nbsp;            switch (i) {</b>
+&nbsp;                case 1, 2, 3, 4 -&gt; {
+<b class="nc">&nbsp;                    input = mn.getUserInput(sc);</b>
+<b class="nc">&nbsp;                    mn.secondMenuSwitch(input, i);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;                case 5 -&gt; {
+&nbsp;                    //wait for compare nation function to display something
+<b class="nc">&nbsp;                    System.out.println(&quot;Please choose an option: &quot;);</b>
+<b class="nc">&nbsp;                    mn.compareNations();</b>
+<b class="nc">&nbsp;                    input = mn.getUserInput(sc);</b>
+<b class="nc">&nbsp;                    switch (input) {</b>
+&nbsp;                        case &quot;1&quot; -&gt; {
+&nbsp;                            //query a country
+<b class="nc">&nbsp;                            mn.displayCompareNations();</b>
+<b class="nc">&nbsp;                            input = mn.getUserInput(sc);</b>
+<b class="nc">&nbsp;                            System.out.println(&quot;Please enter two countries name, ex: Norway, Germany&quot;);</b>
+<b class="nc">&nbsp;                            switch (input) {</b>
+&nbsp;                                case &quot;1&quot; -&gt; {
+<b class="nc">&nbsp;                                    String[] twoCountries = mn.getUserInput(sc).split(&quot;, &quot;);</b>
+<b class="nc">&nbsp;                                    mn.compareTwoCountries(twoCountries, 1);</b>
+<b class="nc">&nbsp;                                }</b>
+&nbsp;                                case &quot;2&quot; -&gt; {
+<b class="nc">&nbsp;                                    String[] twoCountries = mn.getUserInput(sc).split(&quot;, &quot;);</b>
+<b class="nc">&nbsp;                                    mn.compareTwoCountries(twoCountries, 2);</b>
+<b class="nc">&nbsp;                                }</b>
+&nbsp;                                case &quot;3&quot; -&gt; {
+<b class="nc">&nbsp;                                    String[] twoCountries = mn.getUserInput(sc).split(&quot;, &quot;);</b>
+<b class="nc">&nbsp;                                    mn.compareTwoCountries(twoCountries, 3);</b>
+<b class="nc">&nbsp;                                }</b>
+&nbsp;                                case &quot;4&quot; -&gt; {
+<b class="nc">&nbsp;                                    String[] twoCountries = mn.getUserInput(sc).split(&quot;, &quot;);</b>
+<b class="nc">&nbsp;                                    mn.compareTwoCountries(twoCountries, 4);</b>
+&nbsp;                                }
+&nbsp;                            }
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                        case &quot;2&quot; -&gt; {
+<b class="nc">&nbsp;                            Country.printCountries();</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                        case &quot;3&quot; -&gt; {
+<b class="nc">&nbsp;                            mn.viewRankingMethodology();</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;                case 6 -&gt; {
+<b class="nc">&nbsp;                    System.out.println(&quot;Here are all the countries name you can query!&quot;);</b>
+<b class="nc">&nbsp;                    Country.printCountries();</b>
+<b class="nc">&nbsp;                    System.out.println();</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;                case 7 -&gt; {
+&nbsp;                    //wait for view ranking methodology
+<b class="nc">&nbsp;                    mn.viewRankingMethodology();</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-09 11:01</div>
+</div>
+</body>
+</html>
