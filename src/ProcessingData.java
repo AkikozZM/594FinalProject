@@ -2,6 +2,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * e.g. we would like to know the social indicator of China, we call calcIndicator(countryName, 1)
  * to get the value
  */
-public class ProcessingData {
+public class ProcessingData implements Comparator<ProcessingData.IndexRanking> {
     private static final String[] SOCIALINDI = new String[]{"Happiness Ladder Score",
             "Gender Development Index", "Expected Years of Education", "Freedom to Make Life Choices",
             "Social Support", "Generosity"};
@@ -21,7 +22,10 @@ public class ProcessingData {
     private static final String[] POLLUTIONINDI = new String[]{"Air Quality Index",
             "Pollution Deaths per 100k", "CO2 from Coal",
             "CO2 from Oil", "CO2 from Gas", "Total CO2 Emissions"};
-
+    private static ArrayList<IndexRanking> socialRankings = new ArrayList<>();
+    private static ArrayList<IndexRanking> healthRankings = new ArrayList<>();
+    private static ArrayList<IndexRanking> economicRankings = new ArrayList<>();
+    private static ArrayList<IndexRanking> pollutionRankings = new ArrayList<>();
 
     public void displayIndicator(String[] countries, int option) {
         List<Tuple> info = new ArrayList<>();
@@ -108,5 +112,93 @@ public class ProcessingData {
             this.indicator_roundup = df.format(indicator);
         }
     }
+    public class IndexRanking {
+        Double indexValue;
+        String country;
+        public IndexRanking(Double idx, String country) {
+            this.indexValue = idx;
+            this.country = country;
+        }
+    }
 
+    @Override
+    public int compare(IndexRanking o1, IndexRanking o2) {
+        return (int) (o2.indexValue * 100) - (int) (o1.indexValue * 100);
+    }
+
+    public ArrayList<IndexRanking> socialRankingsCalculation() {
+        ArrayList<IndexRanking> social = new ArrayList<>();
+
+        if (this.socialRankings.size() > 0) {
+            return this.socialRankings;
+        }
+
+        for (String country : Country.getCountriesMap().keySet()) {
+            social.add(new IndexRanking(calcSocial(Country.getCountriesData(country).getMetrics(SOCIALINDI)), country));
+        }
+
+        Collections.sort(social, new ProcessingData());
+
+        this.socialRankings = social;
+
+        return social;
+    }
+
+    public ArrayList<IndexRanking> healthRankingsCalculation() {
+        ArrayList<IndexRanking> health = new ArrayList<>();
+
+        if (this.healthRankings.size() > 0) {
+            return this.healthRankings;
+        }
+
+        for (String country : Country.getCountriesMap().keySet()) {
+            health.add(new IndexRanking(calcHealth(Country.getCountriesData(country).getMetrics(HEALTHINDI)), country));
+        }
+
+        Collections.sort(health, new ProcessingData());
+
+        this.healthRankings = health;
+
+        return health;
+    }
+
+    public ArrayList<IndexRanking> economicRankingsCalculation() {
+        ArrayList<IndexRanking> economic = new ArrayList<>();
+
+        if (this.economicRankings.size() > 0) {
+            return this.economicRankings;
+        }
+
+        for (String country : Country.getCountriesMap().keySet()) {
+            economic.add(new IndexRanking(calcEcon(Country.getCountriesData(country).getMetrics(ECONOMICINDI)), country));
+        }
+
+        Collections.sort(economic, new ProcessingData());
+
+        this.economicRankings = economic;
+
+        return economic;
+    }
+
+    public ArrayList<IndexRanking> pollutionRankingsCalculation() {
+        ArrayList<IndexRanking> pollution = new ArrayList<>();
+
+        if (this.pollutionRankings.size() > 0) {
+            return this.pollutionRankings;
+        }
+
+        for (String country : Country.getCountriesMap().keySet()) {
+            pollution.add(new IndexRanking(calcPoll(Country.getCountriesData(country).getMetrics(HEALTHINDI)), country));
+        }
+
+        Collections.sort(pollution, new ProcessingData());
+
+        for (IndexRanking idx : pollution) {
+            System.out.println(idx.country);
+        }
+
+        this.pollutionRankings = pollution;
+
+        return pollution;
+    }
 }
