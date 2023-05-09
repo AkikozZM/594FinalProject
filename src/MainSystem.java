@@ -56,7 +56,7 @@ public class MainSystem {
                             Country.printCountries();
                         }
                         case "3" -> {
-
+                            mn.viewRankingMethodology();
                         }
                     }
                 }
@@ -67,6 +67,7 @@ public class MainSystem {
                 }
                 case 7 -> {
                     //wait for view ranking methodology
+                    mn.viewRankingMethodology();
                 }
             }
         }
