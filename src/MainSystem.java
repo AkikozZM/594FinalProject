@@ -32,24 +32,21 @@ public class MainSystem {
                             //query a country
                             mn.displayCompareNations();
                             input = mn.getUserInput(sc);
+                            System.out.println("Please enter two countries name, ex: Norway, Germany");
                             switch (input) {
                                 case "1" -> {
-                                    System.out.println("Please enter two countries name, ex: Norway, Germany");
                                     String[] twoCountries = mn.getUserInput(sc).split(", ");
                                     mn.compareTwoCountries(twoCountries, 1);
                                 }
                                 case "2" -> {
-                                    System.out.println("Please enter two countries name, ex: Norway, Germany");
                                     String[] twoCountries = mn.getUserInput(sc).split(", ");
                                     mn.compareTwoCountries(twoCountries, 2);
                                 }
                                 case "3" -> {
-                                    System.out.println("Please enter two countries name, ex: Norway, Germany");
                                     String[] twoCountries = mn.getUserInput(sc).split(", ");
                                     mn.compareTwoCountries(twoCountries, 3);
                                 }
                                 case "4" -> {
-                                    System.out.println("Please enter two countries name, ex: Norway, Germany");
                                     String[] twoCountries = mn.getUserInput(sc).split(", ");
                                     mn.compareTwoCountries(twoCountries, 4);
                                 }

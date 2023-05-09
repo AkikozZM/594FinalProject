@@ -1,3 +1,5 @@
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,7 +30,7 @@ public class ProcessingData {
         }
         Collections.sort(info, (a, b)->a.indicator.compareTo(b.indicator));
         for (Tuple i : info) {
-            System.out.println(i.name + ": " + i.indicator);
+            System.out.println(i.name + ": " + i.indicator_roundup);
         }
     }
 
@@ -97,9 +99,13 @@ public class ProcessingData {
     private class Tuple {
         String name;
         Double indicator;
+        String indicator_roundup;
         public Tuple(String name, Double indicator) {
             this.name = name;
             this.indicator = indicator;
+            DecimalFormat df = new DecimalFormat("#.##");
+            df.setRoundingMode(RoundingMode.CEILING);
+            this.indicator_roundup = df.format(indicator);
         }
     }
 
