@@ -234,10 +234,6 @@ public class ProcessingData implements Comparator<ProcessingData.IndexRanking> {
 
         Collections.sort(pollution, new ProcessingData());
 
-        for (IndexRanking idx : pollution) {
-            System.out.println(idx.country + "   IDX Value: " + idx.indexValue);
-        }
-
         this.pollutionRankings = pollution;
 
         return pollution;

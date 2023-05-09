@@ -129,7 +129,15 @@ public class Menu {
     public void compareTwoCountries(String[] countries, int i) {
         ProcessingData pd = new ProcessingData();
         pd.displayIndicator(countries, i);
+        Comparison comp = new Comparison();
+        Comparison temp = comp.generateComparison(countries[0], countries[1]);
 
+        if (i == 1) printComparison(temp, "social");
+        else if (i == 2) printComparison(temp, "health");
+        else if (i == 3) printComparison(temp, "economic");
+        else if (i == 4) printComparison(temp, "pollution");
+
+        System.out.println();
     }
 
     public void viewRankingMethodology() {
@@ -144,4 +152,40 @@ public class Menu {
                 + "different each country is in terms of a percentage. These values are calculated using the \n"
                 + "absolute value of the ratio of the difference in two values to their average multiplied by 100.");
     }
+    public void printComparison(Comparison comp, String category) {
+        if (comp == null) {
+            return;
+        }
+        if (category.toLowerCase().equals("social")) {
+            System.out.println("Aggregate Difference: " + comp.getSocial().getAggregateComparison() +
+                    "\nHappiness Ladder Score: " + comp.getSocial().getHappiness() + "\nGender Development Index: "
+                    + comp.getSocial().getGenderDevelopmentIndex() + "\nExpected Years of Education: "
+                    + comp.getSocial().getYearsOfEducation() + "\nFreedom to Make Life Choices: "
+                    + comp.getSocial().getFreedomLifeChoices() + "\nSocial Support: "
+                    + comp.getSocial().getSocialSupport() + "\nGenerosity: " + comp.getSocial().getGenerosity());
+        } else if (category.toLowerCase().equals("health")) {
+            System.out.println("Aggregate Difference: " + comp.getHealth().getAggregateComparison() +
+                    "\nLife Expectancy: " + comp.getHealth().getLifeExpectancy() + "\nDoctors per 10k people: "
+                    + comp.getHealth().getDoctors() + "\nCancer %: " + comp.getHealth().getCancerRate()
+                    + "\nDiabetes %: " + comp.getHealth().getDiabetesRate() + "\nHIV/AIDS and Tuberculosis %: "
+                    + comp.getHealth().getHivAidsTuberculosisRate() + "\nNutritional Deficiencies: "
+                    + comp.getHealth().getNutrition());
+        } else if (category.toLowerCase().equals("economic")) {
+            System.out.println("Aggregate Difference: " + comp.getEconomic().getAggregateComparison()
+                    + "\nGDP Per Capita: " + comp.getEconomic().getGdpPerCapita()
+                    + "\nGDP Per Capita Growth Rate: " + comp.getEconomic().getGrowthRate()
+                    + "\n% Living on Less than $30 Per Day: " + comp.getEconomic().getLessThan$30Rate()
+                    + "\nInternet Speed: " + comp.getEconomic().getInternetSpeed()
+                    + "\nMulti-Dimensional Poverty Index: " + comp.getEconomic().getMultidimensionalPoverty()
+                    + "\nIncome Inequality: " + comp.getEconomic().getIncomeInequality());
+        } else if (category.toLowerCase().equals("pollution")) {
+            System.out.println("Aggregate Difference: " + comp.getPollution().getAggregateComparison()
+                    + "\nAir Quality Index: " + comp.getPollution().getAqi()
+                    + "\nPollution Deaths per 100k: " + comp.getPollution().getDeathsPer100k()
+                    + "\nCO2 from Coal: " + comp.getPollution().getCoalCO2() + "\nCO2 from Oil"
+                    + comp.getPollution().getOilCO2() + "\nCO2 from Gas: " + comp.getPollution().getGasCO2()
+                    + "\nTotal CO2 Emissions: " + comp.getPollution().getTotalEmissions());
+        }
+    }
 }
+

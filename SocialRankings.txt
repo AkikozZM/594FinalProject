@@ -1,0 +1,195 @@
+Iceland, 8.59
+Australia, 8.37
+New Zealand, 8.23
+Netherlands, 8.18
+Norway, 8.18
+Denmark, 8.02
+United Kingdom, 7.95
+Sweden, 7.89
+Ireland, 7.84
+Canada, 7.69
+United States, 7.56
+Switzerland, 7.51
+Thailand, 7.45
+Austria, 7.41
+Malta, 7.39
+Uzbekistan, 7.37
+Finland, 7.33
+Korea (Republic of), 7.33
+Germany, 7.25
+Grenada, 7.21
+Israel, 7.2
+Bahrain, 7.09
+Indonesia, 7.07
+Singapore, 7.02
+Luxembourg, 6.94
+Slovenia, 6.92
+United Arab Emirates, 6.89
+Kyrgyzstan, 6.83
+Venezuela (Bolivarian Republic of), 6.78
+Estonia, 6.77
+Mongolia, 6.75
+Uruguay, 6.73
+Kazakhstan, 6.65
+Fiji, 6.55
+Spain, 6.53
+Mauritius, 6.52
+Turkmenistan, 6.49
+Russian Federation, 6.43
+Brazil, 6.41
+Qatar, 6.41
+Malaysia, 6.4
+Costa Rica, 6.4
+Serbia, 6.39
+Samoa, 6.35
+Bolivia (Plurinational State of), 6.33
+Paraguay, 6.3
+Saint Kitts and Nevis, 6.3
+Bosnia and Herzegovina, 6.3
+Hong Kong China (SAR), 6.29
+France, 6.28
+Chile, 6.24
+Maldives, 6.21
+Nicaragua, 6.17
+Latin America and the Caribbean, 6.15
+Honduras, 6.14
+Slovakia, 6.14
+Liechtenstein, 6.11
+Cyprus, 6.1
+Kuwait, 6.1
+Belgium, 6.09
+The former Yugoslav Republic of Macedonia, 6.08
+Europe and Central Asia, 6.08
+Italy, 6.05
+Brunei Darussalam, 6.05
+Barbados, 6.02
+Saudi Arabia, 5.99
+Ukraine, 5.97
+Poland, 5.96
+Tonga, 5.96
+Guatemala, 5.95
+Antigua and Barbuda, 5.94
+Bulgaria, 5.93
+Croatia, 5.93
+Jamaica, 5.91
+Belize, 5.9
+Montenegro, 5.9
+Czech Republic, 5.88
+Nepal, 5.88
+Argentina, 5.84
+Sri Lanka, 5.84
+World, 5.84
+Angola, 5.82
+Panama, 5.78
+Colombia, 5.78
+Philippines, 5.77
+Ecuador, 5.75
+Latvia, 5.72
+Dominica, 5.7
+Bahamas, 5.69
+Bhutan, 5.69
+Lithuania, 5.67
+Dominican Republic, 5.67
+Oman, 5.64
+Cuba, 5.62
+Guyana, 5.62
+Mexico, 5.62
+El Salvador, 5.6
+Libya, 5.59
+Tajikistan, 5.59
+Seychelles, 5.58
+Saint Vincent and the Grenadines, 5.58
+Andorra, 5.54
+Cabo Verde, 5.54
+Hungary, 5.54
+East Asia and the Pacific, 5.54
+Myanmar, 5.51
+South Africa, 5.51
+Suriname, 5.51
+Cambodia, 5.49
+Kiribati, 5.48
+Ghana, 5.47
+Palau, 5.44
+Kenya, 5.4
+China, 5.38
+Peru, 5.38
+Lao People's Democratic Republic, 5.31
+Timor-Leste, 5.28
+Congo, 5.26
+Belarus, 5.23
+Sao Tome and Principe, 5.22
+Gambia, 5.16
+Albania, 5.13
+Romania, 5.12
+Armenia, 5.11
+Mozambique, 5.1
+Zambia, 5.07
+Viet Nam, 5.06
+Saint Lucia, 5.02
+Portugal, 5.02
+Trinidad and Tobago, 5.02
+Uganda, 5.01
+Vanuatu, 5
+Micronesia (Federated States of), 4.96
+Bangladesh, 4.92
+Cameroon, 4.87
+Sub-Saharan Africa, 4.87
+Moldova (Republic of), 4.82
+Congo (Democratic Republic of the), 4.73
+Palestine State of, 4.7
+Namibia, 4.65
+Tanzania (United Republic of), 4.65
+Nigeria, 4.57
+Turkey, 4.52
+Guinea-Bissau, 4.51
+Equatorial Guinea, 4.51
+Ethiopia, 4.49
+Azerbaijan, 4.47
+Japan, 4.45
+Papua New Guinea, 4.44
+South Asia, 4.44
+Lebanon, 4.44
+Liberia, 4.38
+Iran (Islamic Republic of), 4.37
+Jordan, 4.35
+Gabon, 4.35
+Côte d'Ivoire, 4.28
+Senegal, 4.22
+India, 4.21
+Egypt, 4.18
+Burkina Faso, 4.1
+Iraq, 4.09
+Guinea, 4.08
+Lesotho, 4.06
+Algeria, 4.05
+Madagascar, 4.01
+Syrian Arab Republic, 4
+Arab States, 3.99
+Central African Republic, 3.97
+Mali, 3.94
+Georgia, 3.94
+Tunisia, 3.94
+Rwanda, 3.88
+South Sudan, 3.86
+Sudan, 3.85
+Swaziland, 3.85
+Solomon Islands, 3.81
+Comoros, 3.8
+Zimbabwe, 3.8
+Pakistan, 3.8
+Sierra Leone, 3.77
+Togo, 3.7
+Malawi, 3.63
+Botswana, 3.53
+Mauritania, 3.52
+Djibouti, 3.5
+Haiti, 3.4
+Chad, 3.22
+Niger, 3.2
+Benin, 3.19
+Yemen, 3.16
+Morocco, 3.09
+Burundi, 2.76
+Eritrea, 0
+Afghanistan, 0
+Greece, 0

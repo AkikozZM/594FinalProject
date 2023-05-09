@@ -1,0 +1,195 @@
+Romania, 3.52
+Chile, 3.38
+Hungary, 3.08
+Poland, 2.98
+Thailand, 2.92
+Brazil, 2.81
+Grenada, 2.71
+Hong Kong China (SAR), 2.7
+Guyana, 2.7
+United States, 2.67
+Trinidad and Tobago, 2.55
+Tonga, 2.55
+China, 2.52
+Panama, 2.44
+Jordan, 2.44
+Chad, 2.41
+Singapore, 2.4
+Uruguay, 2.4
+Bangladesh, 2.39
+Latvia, 2.38
+Kazakhstan, 2.35
+Costa Rica, 2.32
+United Arab Emirates, 2.3
+Guatemala, 2.29
+East Asia and the Pacific, 2.29
+Bulgaria, 2.28
+Senegal, 2.28
+Saudi Arabia, 2.28
+Congo, 2.27
+Russian Federation, 2.27
+South Sudan, 2.27
+Slovakia, 2.27
+Mexico, 2.27
+Kuwait, 2.26
+Sri Lanka, 2.24
+Papua New Guinea, 2.23
+Eritrea, 2.21
+Malaysia, 2.21
+Burkina Faso, 2.21
+Sub-Saharan Africa, 2.2
+Ghana, 2.2
+Europe and Central Asia, 2.2
+Malta, 2.2
+Colombia, 2.19
+Turkey, 2.19
+Cambodia, 2.17
+Oman, 2.17
+Samoa, 2.17
+Estonia, 2.17
+Lithuania, 2.17
+Serbia, 2.17
+Saint Lucia, 2.16
+Tanzania (United Republic of), 2.16
+United Kingdom, 2.16
+Micronesia (Federated States of), 2.16
+Congo (Democratic Republic of the), 2.15
+Slovenia, 2.14
+Venezuela (Bolivarian Republic of), 2.14
+Japan, 2.13
+India, 2.12
+Nigeria, 2.12
+Solomon Islands, 2.11
+Ukraine, 2.1
+South Asia, 2.08
+Equatorial Guinea, 2.08
+Mauritius, 2.06
+Gambia, 2.06
+Dominican Republic, 2.06
+Mali, 2.05
+Myanmar, 2.05
+Cuba, 2.03
+Iran (Islamic Republic of), 2.02
+El Salvador, 2.02
+Palestine State of, 2.02
+Ecuador, 2.01
+World, 2.01
+Côte d'Ivoire, 2
+Kenya, 2
+Sao Tome and Principe, 2
+Croatia, 2
+Ethiopia, 2
+Lao People's Democratic Republic, 1.99
+Jamaica, 1.99
+Benin, 1.98
+Namibia, 1.97
+Liechtenstein, 1.97
+Fiji, 1.97
+Israel, 1.96
+Botswana, 1.96
+Guinea-Bissau, 1.95
+Antigua and Barbuda, 1.95
+Egypt, 1.95
+Qatar, 1.95
+Algeria, 1.94
+Afghanistan, 1.94
+Nepal, 1.94
+Barbados, 1.94
+Bahrain, 1.93
+Armenia, 1.93
+Haiti, 1.92
+Djibouti, 1.91
+Kiribati, 1.91
+Ireland, 1.91
+Argentina, 1.9
+Georgia, 1.9
+Kyrgyzstan, 1.9
+Albania, 1.9
+Belarus, 1.89
+Liberia, 1.88
+Uzbekistan, 1.87
+Germany, 1.87
+Arab States, 1.86
+Bosnia and Herzegovina, 1.86
+Angola, 1.85
+Paraguay, 1.84
+Comoros, 1.84
+Mauritania, 1.84
+Cameroon, 1.84
+Greece, 1.84
+Belize, 1.83
+Viet Nam, 1.83
+Togo, 1.83
+Peru, 1.83
+Timor-Leste, 1.82
+Montenegro, 1.81
+Canada, 1.81
+South Africa, 1.81
+Guinea, 1.81
+Central African Republic, 1.8
+Syrian Arab Republic, 1.8
+Saint Kitts and Nevis, 1.79
+Rwanda, 1.79
+Zambia, 1.78
+Yemen, 1.78
+Brunei Darussalam, 1.78
+Mongolia, 1.76
+Niger, 1.76
+Italy, 1.75
+Bhutan, 1.75
+Madagascar, 1.74
+Palau, 1.74
+Uganda, 1.73
+Sweden, 1.71
+Vanuatu, 1.68
+Pakistan, 1.68
+Norway, 1.67
+Moldova (Republic of), 1.66
+Libya, 1.66
+Portugal, 1.66
+Belgium, 1.63
+Azerbaijan, 1.62
+Sierra Leone, 1.62
+Cyprus, 1.61
+Netherlands, 1.6
+Korea (Republic of), 1.6
+Malawi, 1.59
+Cabo Verde, 1.59
+Gabon, 1.57
+Austria, 1.57
+The former Yugoslav Republic of Macedonia, 1.56
+Spain, 1.56
+Philippines, 1.55
+Lesotho, 1.55
+Iraq, 1.53
+Suriname, 1.53
+Dominica, 1.52
+Swaziland, 1.52
+Saint Vincent and the Grenadines, 1.52
+Seychelles, 1.51
+Australia, 1.5
+Zimbabwe, 1.47
+Switzerland, 1.46
+Andorra, 1.44
+Bolivia (Plurinational State of), 1.44
+Denmark, 1.43
+Finland, 1.42
+Latin America and the Caribbean, 1.35
+Indonesia, 1.35
+Mozambique, 1.33
+Nicaragua, 1.33
+Honduras, 1.32
+Tunisia, 1.3
+Morocco, 1.3
+Bahamas, 1.26
+Sudan, 1.24
+Luxembourg, 1.18
+Czech Republic, 1.14
+Lebanon, 1.11
+Tajikistan, 1.04
+France, 0.98
+Iceland, 0.96
+New Zealand, 0.86
+Burundi, 0
+Maldives, 0
+Turkmenistan, 0

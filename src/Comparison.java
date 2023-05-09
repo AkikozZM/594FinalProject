@@ -38,7 +38,7 @@ public class Comparison {
             "Gender Development Index", "Expected Years of Education", "Freedom to Make Life Choices",
             "Social Support", "Generosity"};
     private static final String[] HEALTHINDI = new String[]{"Life Expectancy", "Doctors per 10k people",
-            "Cancer %", "Diabetes %", "HIV/AIDS and Tuberculosis %"};
+            "Cancer %", "Diabetes %", "HIV/AIDS and Tuberculosis %", "Nutritional Deficiencies"};
     private static final String[] ECONOMICINDI = new String[]{"GDP Per Capita",
             "GDP Per Capita Growth Rate", "% Living on Less than $30 Per Day", "Internet Speed",
             "Multi-Dimensional Poverty Index", "Income Inequality"};
@@ -146,8 +146,9 @@ public class Comparison {
          * Calculates the aggregate comparison value.
          */
         public void setAggregateComparison() {
-            this.aggregateComparison = (this.socialSupport + this.generosity + this.happiness +
-                    this.freedomLifeChoices + this.yearsOfEducation + this.genderDevelopmentIndex) / 6;
+            BigDecimal bd = new BigDecimal((this.socialSupport + this.generosity + this.happiness +
+                    this.freedomLifeChoices + this.yearsOfEducation + this.genderDevelopmentIndex) / 6);
+            this.aggregateComparison = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
     }
 
@@ -243,8 +244,9 @@ public class Comparison {
          * Calculates the aggregate comparison value.
          */
         public void setAggregateComparison() {
-            this.aggregateComparison = (this.cancerRate + this.diabetesRate + this.hivAidsTuberculosisRate
-                    + this.doctors + this.lifeExpectancy + this.nutrition) / 6;
+            BigDecimal bd = new BigDecimal((this.cancerRate + this.diabetesRate + this.hivAidsTuberculosisRate
+                    + this.doctors + this.lifeExpectancy + this.nutrition) / 6);
+            this.aggregateComparison = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
     }
 
@@ -340,8 +342,9 @@ public class Comparison {
          * Calculates the aggregate comparison value.
          */
         public void setAggregateComparison() {
-            this.aggregateComparison = (this.gdpPerCapita + this.incomeInequality + this.internetSpeed
-                    + this.growthRate + this.multidimensionalPoverty + this.lessThan$30Rate) / 6;
+            BigDecimal bd = new BigDecimal((this.gdpPerCapita + this.incomeInequality + this.internetSpeed
+                    + this.growthRate + this.multidimensionalPoverty + this.lessThan$30Rate) / 6);
+            this.aggregateComparison = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
     }
 
@@ -436,8 +439,9 @@ public class Comparison {
          * Calculates the aggregate comparison value.
          */
         public void setAggregateComparison() {
-            this.aggregateComparison = (this.aqi + this.totalEmissions + this.gasCO2 + this.oilCO2
-                    + this.deathsPer100k + this.coalCO2) / 6;
+            BigDecimal bd = new BigDecimal((this.aqi + this.totalEmissions + this.gasCO2 + this.oilCO2
+                    + this.deathsPer100k + this.coalCO2) / 6);
+            this.aggregateComparison = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
     }
 
