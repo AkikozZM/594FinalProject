@@ -531,8 +531,8 @@ public class Comparison {
         Double fourthVal;  // Fourth metric comparison value.
         Double fifthVal;  // Fifth metric comparison value.
         Double sixthVal;  // Sixth metric comparison value.
-        List<Double> queryFirst;  // Values in specific category for first country;
-        List<Double> querySecond;  // Values in specific category for second country;
+        Double[] queryFirst;  // Values in specific category for first country;
+        Double[] querySecond;  // Values in specific category for second country;
         BigDecimal bd;  // For rounding.
 
         if (!countryIndices.containsKey(firstCountry.toLowerCase())
@@ -550,23 +550,23 @@ public class Comparison {
         queryFirst = Country.getCountriesData(firstCountry).getMetrics(SOCIALINDI);
         querySecond = Country.getCountriesData(secondCountry).getMetrics(SOCIALINDI);
 
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(0) - querySecond.get(0))) /
-                ((queryFirst.get(0) + querySecond.get(0)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[0] - querySecond[0])) /
+                ((queryFirst[0] + querySecond[0]) / 2)));
         firstVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(1) - querySecond.get(1))) /
-                ((queryFirst.get(1) + querySecond.get(1)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[1] - querySecond[1])) /
+                ((queryFirst[1] + querySecond[1]) / 2)));
         secondVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(2) - querySecond.get(2))) /
-                ((queryFirst.get(2) + querySecond.get(2)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[2] - querySecond[2])) /
+                ((queryFirst[2] + querySecond[2]) / 2)));
         thirdVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(3) - querySecond.get(3))) /
-                ((queryFirst.get(3) + querySecond.get(3)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[3] - querySecond[3])) /
+                ((queryFirst[3] + querySecond[3]) / 2)));
         fourthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(4) - querySecond.get(4))) /
-                ((queryFirst.get(4) + querySecond.get(4)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[4] - querySecond[4])) /
+                ((queryFirst[4] + querySecond[4]) / 2)));
         fifthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(5) - querySecond.get(5))) /
-                ((queryFirst.get(5) + querySecond.get(5)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[5] - querySecond[5])) /
+                ((queryFirst[5] + querySecond[5]) / 2)));
         sixthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
         comp.social = new SocialComparison(firstVal, secondVal, thirdVal, fourthVal, fifthVal, sixthVal);
@@ -576,23 +576,23 @@ public class Comparison {
         queryFirst = Country.getCountriesData(firstCountry).getMetrics(HEALTHINDI);
         querySecond = Country.getCountriesData(secondCountry).getMetrics(HEALTHINDI);
 
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(0) - querySecond.get(0))) /
-                ((queryFirst.get(0) + querySecond.get(0)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[0] - querySecond[0])) /
+                ((queryFirst[0] + querySecond[0]) / 2)));
         firstVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(1) - querySecond.get(1))) /
-                ((queryFirst.get(1) + querySecond.get(1)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[1] - querySecond[1])) /
+                ((queryFirst[1] + querySecond[1]) / 2)));
         secondVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(2) - querySecond.get(2))) /
-                ((queryFirst.get(2) + querySecond.get(2)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[2] - querySecond[2])) /
+                ((queryFirst[2] + querySecond[2]) / 2)));
         thirdVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(3) - querySecond.get(3))) /
-                ((queryFirst.get(3) + querySecond.get(3)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[3] - querySecond[3])) /
+                ((queryFirst[3] + querySecond[3]) / 2)));
         fourthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(4) - querySecond.get(4))) /
-                ((queryFirst.get(4) + querySecond.get(4)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[4] - querySecond[4])) /
+                ((queryFirst[4] + querySecond[4]) / 2)));
         fifthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(5) - querySecond.get(5))) /
-                ((queryFirst.get(5) + querySecond.get(5)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[5] - querySecond[5])) /
+                ((queryFirst[5] + querySecond[5]) / 2)));
         sixthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
         comp.health = new HealthComparison(firstVal, secondVal, thirdVal, fourthVal, fifthVal, sixthVal);
@@ -602,23 +602,23 @@ public class Comparison {
         queryFirst = Country.getCountriesData(firstCountry).getMetrics(ECONOMICINDI);
         querySecond = Country.getCountriesData(secondCountry).getMetrics(ECONOMICINDI);
 
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(0) - querySecond.get(0))) /
-                ((queryFirst.get(0) + querySecond.get(0)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[0] - querySecond[0])) /
+                ((queryFirst[0] + querySecond[0]) / 2)));
         firstVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(1) - querySecond.get(1))) /
-                ((queryFirst.get(1) + querySecond.get(1)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[1] - querySecond[1])) /
+                ((queryFirst[1] + querySecond[1]) / 2)));
         secondVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(2) - querySecond.get(2))) /
-                ((queryFirst.get(2) + querySecond.get(2)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[2] - querySecond[2])) /
+                ((queryFirst[2] + querySecond[2]) / 2)));
         thirdVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(3) - querySecond.get(3))) /
-                ((queryFirst.get(3) + querySecond.get(3)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[3] - querySecond[3])) /
+                ((queryFirst[3] + querySecond[3]) / 2)));
         fourthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(4) - querySecond.get(4))) /
-                ((queryFirst.get(4) + querySecond.get(4)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[4] - querySecond[4])) /
+                ((queryFirst[4] + querySecond[4]) / 2)));
         fifthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(5) - querySecond.get(5))) /
-                ((queryFirst.get(5) + querySecond.get(5)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[5] - querySecond[5])) /
+                ((queryFirst[5] + querySecond[5]) / 2)));
         sixthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
         comp.economic = new EconomicComparison(firstVal, secondVal, thirdVal, fourthVal, fifthVal, sixthVal);
@@ -628,23 +628,23 @@ public class Comparison {
         queryFirst = Country.getCountriesData(firstCountry).getMetrics(POLLUTIONINDI);
         querySecond = Country.getCountriesData(secondCountry).getMetrics(POLLUTIONINDI);
 
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(0) - querySecond.get(0))) /
-                ((queryFirst.get(0) + querySecond.get(0)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[0] - querySecond[0])) /
+                ((queryFirst[0] + querySecond[0]) / 2)));
         firstVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(1) - querySecond.get(1))) /
-                ((queryFirst.get(1) + querySecond.get(1)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[1] - querySecond[1])) /
+                ((queryFirst[1] + querySecond[1]) / 2)));
         secondVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(2) - querySecond.get(2))) /
-                ((queryFirst.get(2) + querySecond.get(2)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[2] - querySecond[2])) /
+                ((queryFirst[2] + querySecond[2]) / 2)));
         thirdVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(3) - querySecond.get(3))) /
-                ((queryFirst.get(3) + querySecond.get(3)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[3] - querySecond[3])) /
+                ((queryFirst[3] + querySecond[3]) / 2)));
         fourthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(4) - querySecond.get(4))) /
-                ((queryFirst.get(4) + querySecond.get(4)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[4] - querySecond[4])) /
+                ((queryFirst[4] + querySecond[4]) / 2)));
         fifthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(5) - querySecond.get(5))) /
-                ((queryFirst.get(5) + querySecond.get(5)) / 2)));
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst[5] - querySecond[5])) /
+                ((queryFirst[5] + querySecond[5]) / 2)));
         sixthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
         comp.pollution = new PollutionComparison(firstVal, secondVal, thirdVal, fourthVal, fifthVal, sixthVal);
