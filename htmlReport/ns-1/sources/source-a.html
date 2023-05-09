@@ -1,0 +1,457 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ProcessingData</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: ProcessingData (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ProcessingData</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/124)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ProcessingData$IndexRanking</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ProcessingData$Tuple</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/139)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.RoundingMode;
+&nbsp;import java.text.DecimalFormat;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Comparator;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class is a utility class used to fetch corresponding indicator data
+&nbsp; * e.g. we would like to know the social indicator of China, we call calcIndicator(countryName, 1)
+&nbsp; * to get the value
+&nbsp; */
+<b class="nc">&nbsp;public class ProcessingData implements Comparator&lt;ProcessingData.IndexRanking&gt; {</b>
+<b class="nc">&nbsp;    private static final String[] SOCIALINDI = new String[]{&quot;Happiness Ladder Score&quot;,</b>
+&nbsp;            &quot;Gender Development Index&quot;, &quot;Expected Years of Education&quot;, &quot;Freedom to Make Life Choices&quot;,
+&nbsp;            &quot;Social Support&quot;, &quot;Generosity&quot;};
+<b class="nc">&nbsp;    private static final String[] HEALTHINDI = new String[]{&quot;Life Expectancy&quot;, &quot;Doctors per 10k people&quot;,</b>
+&nbsp;            &quot;Cancer %&quot;, &quot;Diabetes %&quot;, &quot;HIV/AIDS and Tuberculosis %&quot;, &quot;Nutritional Deficiencies&quot;};
+<b class="nc">&nbsp;    private static final String[] ECONOMICINDI = new String[]{&quot;GDP Per Capita&quot;,</b>
+&nbsp;            &quot;GDP Per Capita Growth Rate&quot;, &quot;% Living on Less than $30 Per Day&quot;, &quot;Internet Speed&quot;,
+&nbsp;            &quot;Multi-Dimensional Poverty Index&quot;, &quot;Income Inequality&quot;};
+<b class="nc">&nbsp;    private static final String[] POLLUTIONINDI = new String[]{&quot;Air Quality Index&quot;,</b>
+&nbsp;            &quot;Pollution Deaths per 100k&quot;, &quot;CO2 from Coal&quot;,
+&nbsp;            &quot;CO2 from Oil&quot;, &quot;CO2 from Gas&quot;, &quot;Total CO2 Emissions&quot;};
+<b class="nc">&nbsp;    private static ArrayList&lt;IndexRanking&gt; socialRankings = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;    private static ArrayList&lt;IndexRanking&gt; healthRankings = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;    private static ArrayList&lt;IndexRanking&gt; economicRankings = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;    private static ArrayList&lt;IndexRanking&gt; pollutionRankings = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;    public void displayIndicator(String[] countries, int option) {
+<b class="nc">&nbsp;        List&lt;Tuple&gt; info = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (String country : countries) {</b>
+<b class="nc">&nbsp;            info.add(new Tuple(country, calcIndicator(country, option)));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Collections.sort(info, (a, b)-&gt;a.indicator.compareTo(b.indicator));</b>
+<b class="nc">&nbsp;        for (Tuple i : info) {</b>
+<b class="nc">&nbsp;            System.out.println(i.name + &quot;: &quot; + i.indicator_roundup);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Double calcIndicator(String countryName, int option) {
+<b class="nc">&nbsp;        Double[] data = findIndicatorElement(countryName, option);</b>
+<b class="nc">&nbsp;        Double res = (double) 0;</b>
+&nbsp;        // to be implemented
+<b class="nc">&nbsp;        switch (option) {</b>
+<b class="nc">&nbsp;            case 1 -&gt; res = calcSocial(data);</b>
+<b class="nc">&nbsp;            case 2 -&gt; res = calcHealth(data);</b>
+<b class="nc">&nbsp;            case 3 -&gt; res = calcEcon(data);</b>
+<b class="nc">&nbsp;            case 4 -&gt; res = calcPoll(data);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return res;</b>
+&nbsp;    }
+&nbsp;    private Double[] findIndicatorElement(String countryName, int option) {
+<b class="nc">&nbsp;        String[] queryTerms = new String[0];</b>
+<b class="nc">&nbsp;        Country query = Country.getCountriesData(countryName);</b>
+<b class="nc">&nbsp;        switch (option) {</b>
+<b class="nc">&nbsp;            case 1 -&gt; queryTerms = SOCIALINDI;</b>
+<b class="nc">&nbsp;            case 2 -&gt; queryTerms = HEALTHINDI;</b>
+<b class="nc">&nbsp;            case 3 -&gt; queryTerms = ECONOMICINDI;</b>
+<b class="nc">&nbsp;            case 4 -&gt; queryTerms = POLLUTIONINDI;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return query.getMetrics(queryTerms);</b>
+&nbsp;    }
+&nbsp;    private Double calcSocial(Double[] data) {
+&nbsp;        // to be implemented
+<b class="nc">&nbsp;        double hdi = 1;</b>
+<b class="nc">&nbsp;        Double[] vals = new Double[6];</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; data.length; ++i) {</b>
+<b class="nc">&nbsp;            vals[i] = data[i];</b>
+<b class="nc">&nbsp;            hdi *= data[i];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        hdi = geometricMean(vals);</b>
+<b class="nc">&nbsp;        return hdi;</b>
+&nbsp;    }
+&nbsp;    private Double calcHealth(Double[] data) {
+&nbsp;        // to be implemented
+<b class="nc">&nbsp;        double hdi = 1;</b>
+<b class="nc">&nbsp;        Double[] vals = new Double[6];</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; data.length; ++i) {</b>
+<b class="nc">&nbsp;            if (i &gt;= 2) {</b>
+<b class="nc">&nbsp;                vals[i] = Math.abs(1 - data[i]);</b>
+<b class="nc">&nbsp;                hdi *= 1 - data[i];</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                vals[i] = data[i];</b>
+<b class="nc">&nbsp;                hdi *= data[i];</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        hdi = geometricMean(vals);</b>
+<b class="nc">&nbsp;        return hdi;</b>
+&nbsp;    }
+&nbsp;    private Double calcEcon(Double[] data) {
+&nbsp;        // to be implemented
+<b class="nc">&nbsp;        double hdi = 1;</b>
+<b class="nc">&nbsp;        Double[] vals = new Double[6];</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; data.length; ++i) {</b>
+<b class="nc">&nbsp;            if (i == 2 || i == 4 || i == 5) {</b>
+<b class="nc">&nbsp;                hdi *= 1 - data[i];</b>
+<b class="nc">&nbsp;                vals[i] = Math.abs(1 - data[i]);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                hdi *= data[i];</b>
+<b class="nc">&nbsp;                vals[i] = data[i];</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        hdi = geometricMean(vals);</b>
+<b class="nc">&nbsp;        return hdi;</b>
+&nbsp;    }
+&nbsp;    private Double calcPoll(Double[] data) {
+&nbsp;        // to be implemented
+<b class="nc">&nbsp;        double hdi = 1;</b>
+<b class="nc">&nbsp;        Double[] vals = new Double[6];</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; data.length; ++i) {</b>
+<b class="nc">&nbsp;            if (i &gt; 0) {</b>
+<b class="nc">&nbsp;                vals[i] = Math.abs(1 - data[i]);</b>
+<b class="nc">&nbsp;                hdi *= 1 - data[i];</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                vals[i] = data[i];</b>
+<b class="nc">&nbsp;                hdi *= data[i];</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        hdi = geometricMean(vals);</b>
+<b class="nc">&nbsp;        return hdi;</b>
+&nbsp;    }
+&nbsp;    private class Tuple {
+&nbsp;        String name;
+&nbsp;        Double indicator;
+&nbsp;        String indicator_roundup;
+<b class="nc">&nbsp;        public Tuple(String name, Double indicator) {</b>
+<b class="nc">&nbsp;            this.name = name;</b>
+<b class="nc">&nbsp;            this.indicator = indicator;</b>
+<b class="nc">&nbsp;            DecimalFormat df = new DecimalFormat(&quot;#.##&quot;);</b>
+<b class="nc">&nbsp;            df.setRoundingMode(RoundingMode.CEILING);</b>
+<b class="nc">&nbsp;            this.indicator_roundup = df.format(indicator);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    public class IndexRanking {
+&nbsp;        Double indexValue;
+&nbsp;        String indexValue_roundup;
+&nbsp;        String country;
+<b class="nc">&nbsp;        public IndexRanking(Double idx, String country) {</b>
+<b class="nc">&nbsp;            this.indexValue = idx;</b>
+<b class="nc">&nbsp;            this.country = country;</b>
+<b class="nc">&nbsp;            DecimalFormat df = new DecimalFormat(&quot;#.##&quot;);</b>
+<b class="nc">&nbsp;            df.setRoundingMode(RoundingMode.CEILING);</b>
+<b class="nc">&nbsp;            this.indexValue_roundup = df.format(indexValue);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getIndexValue_roundup() {
+<b class="nc">&nbsp;            return indexValue_roundup;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Double getIndexValue() {
+<b class="nc">&nbsp;            return indexValue;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getCountry() {
+<b class="nc">&nbsp;            return country;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int compare(IndexRanking o1, IndexRanking o2) {
+<b class="nc">&nbsp;        return (int) (o2.indexValue * 100) - (int) (o1.indexValue * 100);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ArrayList&lt;IndexRanking&gt; socialRankingsCalculation() {
+<b class="nc">&nbsp;        ArrayList&lt;IndexRanking&gt; social = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (this.socialRankings.size() &gt; 0) {</b>
+<b class="nc">&nbsp;            return this.socialRankings;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (String country : Country.getCountriesMap().keySet()) {</b>
+<b class="nc">&nbsp;            social.add(new IndexRanking(calcSocial(Country.getCountriesData(country).getMetrics(SOCIALINDI)), country));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        Collections.sort(social, new ProcessingData());</b>
+&nbsp;
+<b class="nc">&nbsp;        this.socialRankings = social;</b>
+&nbsp;
+<b class="nc">&nbsp;        return social;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ArrayList&lt;IndexRanking&gt; healthRankingsCalculation() {
+<b class="nc">&nbsp;        ArrayList&lt;IndexRanking&gt; health = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (this.healthRankings.size() &gt; 0) {</b>
+<b class="nc">&nbsp;            return this.healthRankings;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (String country : Country.getCountriesMap().keySet()) {</b>
+<b class="nc">&nbsp;            health.add(new IndexRanking(calcHealth(Country.getCountriesData(country).getMetrics(HEALTHINDI)), country));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        Collections.sort(health, new ProcessingData());</b>
+&nbsp;
+<b class="nc">&nbsp;        this.healthRankings = health;</b>
+&nbsp;
+<b class="nc">&nbsp;        return health;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ArrayList&lt;IndexRanking&gt; economicRankingsCalculation() {
+<b class="nc">&nbsp;        ArrayList&lt;IndexRanking&gt; economic = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (this.economicRankings.size() &gt; 0) {</b>
+<b class="nc">&nbsp;            return this.economicRankings;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (String country : Country.getCountriesMap().keySet()) {</b>
+<b class="nc">&nbsp;            economic.add(new IndexRanking(calcEcon(Country.getCountriesData(country).getMetrics(ECONOMICINDI)), country));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        Collections.sort(economic, new ProcessingData());</b>
+&nbsp;
+<b class="nc">&nbsp;        this.economicRankings = economic;</b>
+&nbsp;
+<b class="nc">&nbsp;        return economic;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ArrayList&lt;IndexRanking&gt; pollutionRankingsCalculation() {
+<b class="nc">&nbsp;        ArrayList&lt;IndexRanking&gt; pollution = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (this.pollutionRankings.size() &gt; 0) {</b>
+<b class="nc">&nbsp;            return this.pollutionRankings;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (String country : Country.getCountriesMap().keySet()) {</b>
+<b class="nc">&nbsp;            pollution.add(new IndexRanking(calcPoll(Country.getCountriesData(country).getMetrics(HEALTHINDI)), country));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        Collections.sort(pollution, new ProcessingData());</b>
+&nbsp;
+<b class="nc">&nbsp;        this.pollutionRankings = pollution;</b>
+&nbsp;
+<b class="nc">&nbsp;        return pollution;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the geometric mean for an array.
+&nbsp;     * @param values  The values to compute.
+&nbsp;     * @return  Geometric mean for values.
+&nbsp;     */
+&nbsp;    public static double geometricMean(Double[] values) {
+&nbsp;        double geometricMean;
+&nbsp;
+<b class="nc">&nbsp;        int size = values.length;</b>
+&nbsp;
+<b class="nc">&nbsp;        double[] logValues = new double[size];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size; i++) {</b>
+<b class="nc">&nbsp;            logValues[i] = Math.log(values[i]);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        geometricMean = geometricMeanFromLog(logValues);</b>
+&nbsp;
+<b class="nc">&nbsp;        return geometricMean;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates the geometric mean of log values.
+&nbsp;     * The geometric mean of logarithmic values is simply the arithmethic mean converted to non-logarithmic values (exponentiated)
+&nbsp;     * @param logValues
+&nbsp;     *            array of values in logarithmic form
+&nbsp;     * @return geometric mean
+&nbsp;     */
+&nbsp;    public static double geometricMeanFromLog(double[] logValues) {
+<b class="nc">&nbsp;        double logArithmeticMean = arithmeticMean(logValues);</b>
+<b class="nc">&nbsp;        double geometricMean = Math.exp(logArithmeticMean);</b>
+<b class="nc">&nbsp;        return geometricMean;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * calculate the arithmetic mean
+&nbsp;     * The arithmetic mean is the sum of all values in the array divided by the total number of values in the array.
+&nbsp;     * @param values
+&nbsp;     *            source of data for mean calculation
+&nbsp;     * @return arithmetic mean
+&nbsp;     */
+&nbsp;    public static double arithmeticMean(double[] values) {
+&nbsp;        double arithmeticMean;
+&nbsp;
+<b class="nc">&nbsp;        int size = values.length;</b>
+&nbsp;
+<b class="nc">&nbsp;        double sum = summation(values);</b>
+&nbsp;
+<b class="nc">&nbsp;        arithmeticMean = sum / size;</b>
+&nbsp;
+<b class="nc">&nbsp;        return arithmeticMean;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param values
+&nbsp;     *            source of data for summation calculation
+&nbsp;     * @return the sum of all values within the array
+&nbsp;     */
+&nbsp;    public static double summation(double[] values) {
+<b class="nc">&nbsp;        double sum = 0.0;</b>
+<b class="nc">&nbsp;        int size = values.length;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size; i++) {</b>
+<b class="nc">&nbsp;            sum += values[i];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return sum;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-09 11:01</div>
+</div>
+</body>
+</html>

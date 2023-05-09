@@ -1,0 +1,168 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Cashe</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: Cashe (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Cashe</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import java.io.*;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * Save current user query results to local directory
+&nbsp; * If user query a same country, just load local cashe and print results
+&nbsp; */
+<b class="nc">&nbsp;public class Cashe {</b>
+&nbsp;    /**
+&nbsp;     * Save the user&#39;s query results to local as a txt file.
+&nbsp;     * @param contents Input a rank of countries
+&nbsp;     * @param fileName Set an output filename, ex. &quot;SocialRanking.txt&quot;
+&nbsp;     *                 The File must end with .txt, ow it will return false.
+&nbsp;     * @return True, if save success, ow false.
+&nbsp;     */
+&nbsp;    public boolean saveLocal(ArrayList&lt;ProcessingData.IndexRanking&gt; contents, String fileName) {
+<b class="nc">&nbsp;        if (!fileName.endsWith(&quot;.txt&quot;)) return false;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            FileWriter fw = new FileWriter(fileName);</b>
+<b class="nc">&nbsp;            for (ProcessingData.IndexRanking content : contents) {</b>
+<b class="nc">&nbsp;                fw.write(content.getCountry() + &quot;, &quot; + content.getIndexValue_roundup() + &quot;\n&quot;);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            fw.close();</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;Error: Writing issue.&quot;);</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If it is the user second time query the same thing, please call this function
+&nbsp;     * to load the local cashe.
+&nbsp;     * @param fileName File to load.
+&nbsp;     * @return an ArrayList for country&#39;s ranking
+&nbsp;     */
+&nbsp;    public ArrayList&lt;ProcessingData.IndexRanking&gt; loadCashe(String fileName) {
+<b class="nc">&nbsp;        ArrayList&lt;ProcessingData.IndexRanking&gt; ret = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        try (BufferedReader rd = new BufferedReader(new FileReader(fileName))){</b>
+&nbsp;            String line;
+<b class="nc">&nbsp;            while ((line = rd.readLine()) != null) {</b>
+<b class="nc">&nbsp;                String[] lines = line.split(&quot;, &quot;);</b>
+<b class="nc">&nbsp;                System.out.println(lines[0].trim() + &quot;: &quot; + lines[1]);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;Error: Reading file fail.&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return ret;</b>
+&nbsp;    }
+&nbsp;    public boolean checkFile(String fileName) {
+<b class="nc">&nbsp;        String path = &quot;./&quot;;</b>
+<b class="nc">&nbsp;        File dir = new File(path);</b>
+<b class="nc">&nbsp;        File[] fileList = dir.listFiles();</b>
+<b class="nc">&nbsp;        for (File f : fileList) {</b>
+<b class="nc">&nbsp;            if (f.getName().equals(fileName)) return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;    public void displayAllRankings(ArrayList&lt;ProcessingData.IndexRanking&gt; display) {
+<b class="nc">&nbsp;        for (ProcessingData.IndexRanking s : display) {</b>
+<b class="nc">&nbsp;            System.out.println(s.getCountry() + &quot;: &quot; + s.getIndexValue_roundup());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-09 11:01</div>
+</div>
+</body>
+</html>

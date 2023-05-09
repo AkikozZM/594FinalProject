@@ -1,0 +1,294 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Menu</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: Menu (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Menu</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/116)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Scanner;
+&nbsp;
+<b class="nc">&nbsp;public class Menu {</b>
+<b class="nc">&nbsp;    private static final String[] mainMenu = new String[]{</b>
+&nbsp;            &quot;Social Indicators index&quot;, &quot;Health Indicators index&quot;, &quot;Economic Indicators index&quot;
+&nbsp;            , &quot;Pollution Indicators index&quot;, &quot;Compare Nations&quot;, &quot;View List of Countries&quot;
+&nbsp;            , &quot;View Ranking Methodology&quot;, &quot;Exit&quot;};
+&nbsp;    public void menuDisplay() {
+<b class="nc">&nbsp;        int i = 1;</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Please choose what information you would like to view?&quot;);</b>
+<b class="nc">&nbsp;        for (String word : mainMenu) {</b>
+<b class="nc">&nbsp;            System.out.println(i + &quot;. &quot; + word);</b>
+<b class="nc">&nbsp;            i++;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getUserInput(Scanner sc) {
+<b class="nc">&nbsp;        return sc.nextLine();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void mainMenuSwitch(String number) {
+<b class="nc">&nbsp;        switch (number) {</b>
+<b class="nc">&nbsp;            case &quot;1&quot; -&gt; secondMenu(&quot;Social&quot;);</b>
+<b class="nc">&nbsp;            case &quot;2&quot; -&gt; secondMenu(&quot;Health&quot;);</b>
+<b class="nc">&nbsp;            case &quot;3&quot; -&gt; secondMenu(&quot;Economic&quot;);</b>
+<b class="nc">&nbsp;            case &quot;4&quot; -&gt; secondMenu(&quot;Pollution&quot;);</b>
+<b class="nc">&nbsp;            case &quot;5&quot; -&gt; System.out.println();</b>
+<b class="nc">&nbsp;            case &quot;6&quot; -&gt; System.out.println();</b>
+<b class="nc">&nbsp;            case &quot;7&quot; -&gt; System.out.println();</b>
+<b class="nc">&nbsp;            case &quot;8&quot; -&gt; System.exit(0);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * Social Indicators
+&nbsp;     * Health Indicators
+&nbsp;     * Economic Indicators
+&nbsp;     * Pollution Indicators
+&nbsp;     * All use this function
+&nbsp;     */
+&nbsp;    public void secondMenu(String indicatorName) {
+<b class="nc">&nbsp;        System.out.println(&quot;1. &quot; + &quot;View &quot; + indicatorName + &quot; Indicators.&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;2. &quot; + &quot;View &quot; + indicatorName + &quot; Rankings.&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;3. View Ranking Methodology.&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;4. Return Home.&quot;);</b>
+&nbsp;    }
+&nbsp;    public void secondMenuSwitch(String number, int i) {
+<b class="nc">&nbsp;        switch (number) {</b>
+<b class="nc">&nbsp;            case &quot;1&quot; -&gt; viewIndicator(i);</b>
+&nbsp;            case &quot;2&quot; -&gt; {
+<b class="nc">&nbsp;                Cashe cashe = new Cashe();</b>
+<b class="nc">&nbsp;                ProcessingData pd = new ProcessingData();</b>
+&nbsp;                // wait for display &quot;something&#39;s&quot; rankings
+<b class="nc">&nbsp;                switch (i) {</b>
+&nbsp;                    case 1 -&gt; {
+<b class="nc">&nbsp;                        String filename = &quot;SocialRankings.txt&quot;;</b>
+<b class="nc">&nbsp;                        if (cashe.checkFile(filename)) {</b>
+<b class="nc">&nbsp;                            ArrayList&lt;ProcessingData.IndexRanking&gt; display = cashe.loadCashe(filename);</b>
+&nbsp;                            //cashe.displayAllRankings(display);
+<b class="nc">&nbsp;                        } else {</b>
+<b class="nc">&nbsp;                            ArrayList&lt;ProcessingData.IndexRanking&gt; save = pd.socialRankingsCalculation();</b>
+<b class="nc">&nbsp;                            cashe.saveLocal(save , filename);</b>
+<b class="nc">&nbsp;                            cashe.displayAllRankings(save);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                    case 2 -&gt; {
+<b class="nc">&nbsp;                        String filename = &quot;HealthRankings.txt&quot;;</b>
+<b class="nc">&nbsp;                        if (cashe.checkFile(filename)) {</b>
+<b class="nc">&nbsp;                            ArrayList&lt;ProcessingData.IndexRanking&gt; display = cashe.loadCashe(filename);</b>
+&nbsp;                            //cashe.displayAllRankings(display);
+<b class="nc">&nbsp;                        } else {</b>
+<b class="nc">&nbsp;                            ArrayList&lt;ProcessingData.IndexRanking&gt; save = pd.healthRankingsCalculation();</b>
+<b class="nc">&nbsp;                            cashe.saveLocal(save , filename);</b>
+<b class="nc">&nbsp;                            cashe.displayAllRankings(save);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                    case 3 -&gt; {
+<b class="nc">&nbsp;                        String filename = &quot;EconomicRankings.txt&quot;;</b>
+<b class="nc">&nbsp;                        if (cashe.checkFile(filename)) {</b>
+<b class="nc">&nbsp;                            ArrayList&lt;ProcessingData.IndexRanking&gt; display = cashe.loadCashe(filename);</b>
+&nbsp;                            //cashe.displayAllRankings(display);
+<b class="nc">&nbsp;                        } else {</b>
+<b class="nc">&nbsp;                            ArrayList&lt;ProcessingData.IndexRanking&gt; save = pd.economicRankingsCalculation();</b>
+<b class="nc">&nbsp;                            cashe.saveLocal(save , filename);</b>
+<b class="nc">&nbsp;                            cashe.displayAllRankings(save);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                    case 4 -&gt; {
+<b class="nc">&nbsp;                        String filename = &quot;PollutionRankings.txt&quot;;</b>
+<b class="nc">&nbsp;                        if (cashe.checkFile(filename)) {</b>
+<b class="nc">&nbsp;                            ArrayList&lt;ProcessingData.IndexRanking&gt; display = cashe.loadCashe(filename);</b>
+&nbsp;                            //cashe.displayAllRankings(display);
+<b class="nc">&nbsp;                        } else {</b>
+<b class="nc">&nbsp;                            ArrayList&lt;ProcessingData.IndexRanking&gt; save = pd.pollutionRankingsCalculation();</b>
+<b class="nc">&nbsp;                            cashe.saveLocal(save , filename);</b>
+<b class="nc">&nbsp;                            cashe.displayAllRankings(save);</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void viewIndicator(int i) {
+<b class="nc">&nbsp;        System.out.println(&quot;Please Enter a Country&#39;s name you want to query: &quot;);</b>
+<b class="nc">&nbsp;        Scanner sc = new Scanner(System.in);</b>
+<b class="nc">&nbsp;        String country = sc.nextLine();</b>
+<b class="nc">&nbsp;        String[] countries = new String[1];</b>
+<b class="nc">&nbsp;        countries[0] = country;</b>
+<b class="nc">&nbsp;        ProcessingData pd = new ProcessingData();</b>
+<b class="nc">&nbsp;        System.out.println(&quot;The country: &quot; + country + &quot; indicators index is as followed: &quot;);</b>
+<b class="nc">&nbsp;        pd.displayIndicator(countries, i);</b>
+<b class="nc">&nbsp;        System.out.println();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void compareNations(){
+<b class="nc">&nbsp;        System.out.println(&quot;1. Query a country.&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;2. View List of Countries.&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;3. View Ranking Methodology.&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;4. Return home.&quot;);</b>
+&nbsp;    }
+&nbsp;    public void displayCompareNations() {
+<b class="nc">&nbsp;        System.out.println(&quot;1. Compare Social Indicators&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;2. Compare Health Indicators&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;3. Compare Economic Indicators&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;4. Compare Pollution Indicators&quot;);</b>
+&nbsp;    }
+&nbsp;    public void compareTwoCountries(String[] countries, int i) {
+<b class="nc">&nbsp;        ProcessingData pd = new ProcessingData();</b>
+<b class="nc">&nbsp;        pd.displayIndicator(countries, i);</b>
+<b class="nc">&nbsp;        Comparison comp = new Comparison();</b>
+<b class="nc">&nbsp;        Comparison temp = comp.generateComparison(countries[0], countries[1]);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (i == 1) printComparison(temp, &quot;social&quot;);</b>
+<b class="nc">&nbsp;        else if (i == 2) printComparison(temp, &quot;health&quot;);</b>
+<b class="nc">&nbsp;        else if (i == 3) printComparison(temp, &quot;economic&quot;);</b>
+<b class="nc">&nbsp;        else if (i == 4) printComparison(temp, &quot;pollution&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        System.out.println();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void viewRankingMethodology() {
+<b class="nc">&nbsp;        System.out.println(&quot;\nRanking and Comparison Methodology\n&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;Aggregate indicator rankings are calculated using a geometric mean(equally weighted)\n&quot; +</b>
+&nbsp;                &quot;of each individual data point within the categorical collection of indicators.\n\n&quot; +
+&nbsp;                &quot;The geometric mean provides better estimation for data sets where results tend \n&quot; +
+&nbsp;                &quot;to be more skewed and where the individual data points are dependent on each other.\n&quot;);
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;For the comparison statistics we have provided differential values that represent how\n&quot;</b>
+&nbsp;                + &quot;different each country is in terms of a percentage. These values are calculated using the \n&quot;
+&nbsp;                + &quot;absolute value of the ratio of the difference in two values to their average multiplied by 100.&quot;);
+&nbsp;    }
+&nbsp;    public void printComparison(Comparison comp, String category) {
+<b class="nc">&nbsp;        if (comp == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        if (category.toLowerCase().equals(&quot;social&quot;)) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;Aggregate Difference: &quot; + comp.getSocial().getAggregateComparison() +</b>
+<b class="nc">&nbsp;                    &quot;\nHappiness Ladder Score: &quot; + comp.getSocial().getHappiness() + &quot;\nGender Development Index: &quot;</b>
+<b class="nc">&nbsp;                    + comp.getSocial().getGenderDevelopmentIndex() + &quot;\nExpected Years of Education: &quot;</b>
+<b class="nc">&nbsp;                    + comp.getSocial().getYearsOfEducation() + &quot;\nFreedom to Make Life Choices: &quot;</b>
+<b class="nc">&nbsp;                    + comp.getSocial().getFreedomLifeChoices() + &quot;\nSocial Support: &quot;</b>
+<b class="nc">&nbsp;                    + comp.getSocial().getSocialSupport() + &quot;\nGenerosity: &quot; + comp.getSocial().getGenerosity());</b>
+<b class="nc">&nbsp;        } else if (category.toLowerCase().equals(&quot;health&quot;)) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;Aggregate Difference: &quot; + comp.getHealth().getAggregateComparison() +</b>
+<b class="nc">&nbsp;                    &quot;\nLife Expectancy: &quot; + comp.getHealth().getLifeExpectancy() + &quot;\nDoctors per 10k people: &quot;</b>
+<b class="nc">&nbsp;                    + comp.getHealth().getDoctors() + &quot;\nCancer %: &quot; + comp.getHealth().getCancerRate()</b>
+<b class="nc">&nbsp;                    + &quot;\nDiabetes %: &quot; + comp.getHealth().getDiabetesRate() + &quot;\nHIV/AIDS and Tuberculosis %: &quot;</b>
+<b class="nc">&nbsp;                    + comp.getHealth().getHivAidsTuberculosisRate() + &quot;\nNutritional Deficiencies: &quot;</b>
+<b class="nc">&nbsp;                    + comp.getHealth().getNutrition());</b>
+<b class="nc">&nbsp;        } else if (category.toLowerCase().equals(&quot;economic&quot;)) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;Aggregate Difference: &quot; + comp.getEconomic().getAggregateComparison()</b>
+<b class="nc">&nbsp;                    + &quot;\nGDP Per Capita: &quot; + comp.getEconomic().getGdpPerCapita()</b>
+<b class="nc">&nbsp;                    + &quot;\nGDP Per Capita Growth Rate: &quot; + comp.getEconomic().getGrowthRate()</b>
+<b class="nc">&nbsp;                    + &quot;\n% Living on Less than $30 Per Day: &quot; + comp.getEconomic().getLessThan$30Rate()</b>
+<b class="nc">&nbsp;                    + &quot;\nInternet Speed: &quot; + comp.getEconomic().getInternetSpeed()</b>
+<b class="nc">&nbsp;                    + &quot;\nMulti-Dimensional Poverty Index: &quot; + comp.getEconomic().getMultidimensionalPoverty()</b>
+<b class="nc">&nbsp;                    + &quot;\nIncome Inequality: &quot; + comp.getEconomic().getIncomeInequality());</b>
+<b class="nc">&nbsp;        } else if (category.toLowerCase().equals(&quot;pollution&quot;)) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;Aggregate Difference: &quot; + comp.getPollution().getAggregateComparison()</b>
+<b class="nc">&nbsp;                    + &quot;\nAir Quality Index: &quot; + comp.getPollution().getAqi()</b>
+<b class="nc">&nbsp;                    + &quot;\nPollution Deaths per 100k: &quot; + comp.getPollution().getDeathsPer100k()</b>
+<b class="nc">&nbsp;                    + &quot;\nCO2 from Coal: &quot; + comp.getPollution().getCoalCO2() + &quot;\nCO2 from Oil&quot;</b>
+<b class="nc">&nbsp;                    + comp.getPollution().getOilCO2() + &quot;\nCO2 from Gas: &quot; + comp.getPollution().getGasCO2()</b>
+<b class="nc">&nbsp;                    + &quot;\nTotal CO2 Emissions: &quot; + comp.getPollution().getTotalEmissions());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-09 11:01</div>
+</div>
+</body>
+</html>

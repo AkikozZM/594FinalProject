@@ -67,4 +67,28 @@ public class ComparisonTest {
         assertEquals(0.14, comp.getSocial().getSocialSupport(), 0.00000001);
         assertEquals(0.15, comp.getSocial().getGenerosity(), 0.00000001);
     }
+
+    @Test
+    public void generateComparisonTest() {
+        ImportInfo ii = new ImportInfo();
+        Menu mn = new Menu();
+        try {
+            ii.parseData();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        Comparison comp = new Comparison();
+        Comparison temp = comp.generateComparison("Norway", "Sweden");
+        temp.setCumulativeComparison();
+
+        assertNotNull(temp);
+        assertTrue(temp.getCumulativeComparison() > 0);
+        assertTrue(temp.getPollution().getTotalEmissions() > 0);
+        assertTrue(temp.getPollution().getAggregateComparison() > 0);
+        assertTrue(temp.getEconomic().getAggregateComparison() > 0);
+        assertTrue(temp.getHealth().getAggregateComparison() > 0);
+        assertTrue(temp.getSocial().getAggregateComparison() > 0);
+
+
+    }
 }
