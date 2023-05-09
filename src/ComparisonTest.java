@@ -37,9 +37,6 @@ public class ComparisonTest {
         comp.setHealth(hc);
         comp.setEconomic(ec);
         comp.setPollution(pc);
-        comp.setCumulativeComparison(0.55);
-
-        assertEquals(0.55, comp.getCumulativeComparison(), 0.00000001);
 
         assertEquals(0.4, comp.getPollution().getAqi(),0.00000001);
         assertEquals(0.41, comp.getPollution().getDeathsPer100k(),0.00000001);

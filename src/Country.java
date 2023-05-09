@@ -31,4 +31,8 @@ public class Country {
     public String toString() {
         return countryName + ":\n " + met.toString();
     }
+
+    public static Map<String, Country> getCountriesMap() {
+        return countriesData;
+    }
 }

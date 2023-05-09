@@ -1,8 +1,17 @@
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Comparison class used to compare statistics between two countries / vertices in the
  * comparison graph. Stores information on social, health, economic, and pollution differentials.
  */
 public class Comparison {
+    private static Comparison[][] countryComparisons = new Comparison[195][195];
+    private static Map<String, Integer> countryIndices = new HashMap<>();
+
     /**
      * Social comparison statistics for the two countries representing this edge.
      */
@@ -25,6 +34,27 @@ public class Comparison {
      */
     private Double cumulativeComparison;
 
+    private static final String[] SOCIALINDI = new String[]{"Happiness Ladder Score",
+            "Gender Development Index", "Expected Years of Education", "Freedom to Make Life Choices",
+            "Social Support", "Generosity"};
+    private static final String[] HEALTHINDI = new String[]{"Life Expectancy", "Doctors per 10k people",
+            "Cancer %", "Diabetes %", "HIV/AIDS and Tuberculosis %"};
+    private static final String[] ECONOMICINDI = new String[]{"GDP Per Capita",
+            "GDP Per Capita Growth Rate", "% Living on Less than $30 Per Day", "Internet Speed",
+            "Multi-Dimensional Poverty Index", "Income Inequality"};
+    private static final String[] POLLUTIONINDI = new String[]{"Air Quality Index",
+            "Pollution Deaths per 100k", "CO2 from Coal",
+            "CO2 from Oil", "CO2 from Gas", "Total CO2 Emissions"};
+
+    public Comparison() {
+        int index = 0;
+
+        for (String name : Country.getCountriesMap().keySet()) {
+            countryIndices.put(name.toLowerCase(),index);
+            index++;
+        }
+    }
+
     /**
      * Stores social indicator comparison statistics between two countries.
      */
@@ -35,6 +65,7 @@ public class Comparison {
         private Double freedomLifeChoices;  // Freedom to make life choices comparison value.
         private Double socialSupport;  // Social support comparison value.
         private Double generosity;  // Generosity comparison value.
+        private Double aggregateComparison;  // The aggregate comparison value for these indicators.
 
         /**
          * Constructor for the SocialComparison class.
@@ -102,6 +133,22 @@ public class Comparison {
         public Double getGenerosity() {
             return generosity;
         }
+
+        /**
+         * Getter for aggregate comparison.
+         * @return The aggregate comparison value.
+         */
+        public Double getAggregateComparison() {
+            return aggregateComparison;
+        }
+
+        /**
+         * Calculates the aggregate comparison value.
+         */
+        public void setAggregateComparison() {
+            this.aggregateComparison = (this.socialSupport + this.generosity + this.happiness +
+                    this.freedomLifeChoices + this.yearsOfEducation + this.genderDevelopmentIndex) / 6;
+        }
     }
 
     /**
@@ -114,6 +161,8 @@ public class Comparison {
         private Double cancerRate;  // Cancer rate comparison value.
         private Double diabetesRate;  // Diabetes comparison value.
         private Double hivAidsTuberculosisRate;  // HIV, AIDs, and Tuberculosis comparison value.
+        private Double aggregateComparison;  // The aggregate comparison value for these indicators.
+
 
         /**
          * Constructor for the HealthComparison class.
@@ -181,6 +230,22 @@ public class Comparison {
         public Double getHivAidsTuberculosisRate() {
             return hivAidsTuberculosisRate;
         }
+
+        /**
+         * Getter for aggregate comparison.
+         * @return The aggregate comparison value.
+         */
+        public Double getAggregateComparison() {
+            return aggregateComparison;
+        }
+
+        /**
+         * Calculates the aggregate comparison value.
+         */
+        public void setAggregateComparison() {
+            this.aggregateComparison = (this.cancerRate + this.diabetesRate + this.hivAidsTuberculosisRate
+                    + this.doctors + this.lifeExpectancy + this.nutrition) / 6;
+        }
     }
 
     /**
@@ -193,6 +258,7 @@ public class Comparison {
         private Double internetSpeed;  // Internet speed comparison value.
         private Double multidimensionalPoverty;  // Multidimensional poverty comparison value.
         private Double incomeInequality;  // Income inequality comparison value.
+        private Double aggregateComparison;  // The aggregate comparison value for these indicators.
 
         /**
          * Constructor for the EconomicComparison class.
@@ -261,6 +327,22 @@ public class Comparison {
         public Double getIncomeInequality() {
             return incomeInequality;
         }
+
+        /**
+         * Getter for aggregate comparison.
+         * @return The aggregate comparison value.
+         */
+        public Double getAggregateComparison() {
+            return aggregateComparison;
+        }
+
+        /**
+         * Calculates the aggregate comparison value.
+         */
+        public void setAggregateComparison() {
+            this.aggregateComparison = (this.gdpPerCapita + this.incomeInequality + this.internetSpeed
+                    + this.growthRate + this.multidimensionalPoverty + this.lessThan$30Rate) / 6;
+        }
     }
 
     /**
@@ -273,6 +355,7 @@ public class Comparison {
         private Double oilCO2;  // CO2 from oil comparison value.
         private Double gasCO2;  // CO2 from gas comparison value.
         private Double totalEmissions;  // Total CO2 emissions comparison value.
+        private Double aggregateComparison;  // The aggregate comparison value for these indicators.
 
         /**
          * Constructor for the PollutionComparison class.
@@ -339,6 +422,22 @@ public class Comparison {
          */
         public Double getTotalEmissions() {
             return totalEmissions;
+        }
+
+        /**
+         * Getter for aggregate comparison.
+         * @return The aggregate comparison value.
+         */
+        public Double getAggregateComparison() {
+            return aggregateComparison;
+        }
+
+        /**
+         * Calculates the aggregate comparison value.
+         */
+        public void setAggregateComparison() {
+            this.aggregateComparison = (this.aqi + this.totalEmissions + this.gasCO2 + this.oilCO2
+                    + this.deathsPer100k + this.coalCO2) / 6;
         }
     }
 
@@ -408,10 +507,12 @@ public class Comparison {
 
     /**
      * Setter for total comparison.
-     * @param comparison  The new total comparison value.
      */
-    public void setCumulativeComparison(Double comparison) {
-        this.cumulativeComparison = comparison;
+    public void setCumulativeComparison() {
+        BigDecimal bd = new BigDecimal((this.pollution.aggregateComparison + this.economic.aggregateComparison
+                + this.social.aggregateComparison + this.health.aggregateComparison) / 6);
+
+        this.cumulativeComparison = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
     /**
@@ -420,5 +521,142 @@ public class Comparison {
      */
     public Double getCumulativeComparison() {
         return this.cumulativeComparison;
+    }
+
+    public Comparison generateComparison(String firstCountry, String secondCountry) {
+        Comparison comp = new Comparison();  // Stores the new comparison.
+        Double firstVal;  // First metric comparison value.
+        Double secondVal;  // Second metric comparison value.
+        Double thirdVal;  // Third metric comparison value.
+        Double fourthVal;  // Fourth metric comparison value.
+        Double fifthVal;  // Fifth metric comparison value.
+        Double sixthVal;  // Sixth metric comparison value.
+        List<Double> queryFirst;  // Values in specific category for first country;
+        List<Double> querySecond;  // Values in specific category for second country;
+        BigDecimal bd;  // For rounding.
+
+        if (!countryIndices.containsKey(firstCountry.toLowerCase())
+                || !countryIndices.containsKey(secondCountry.toLowerCase())) {
+            return null;
+        } else if (countryComparisons[countryIndices.get(firstCountry.toLowerCase())]
+                [countryIndices.get(secondCountry.toLowerCase())] != null) {
+            return countryComparisons[countryIndices.get(firstCountry.toLowerCase())]
+                    [countryIndices.get(secondCountry.toLowerCase())];
+        } else if (firstCountry.toLowerCase().equals(secondCountry.toLowerCase())) {
+            return null;
+        }
+
+        // Calculate social comparisons.
+        queryFirst = Country.getCountriesData(firstCountry).getMetrics(SOCIALINDI);
+        querySecond = Country.getCountriesData(secondCountry).getMetrics(SOCIALINDI);
+
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(0) - querySecond.get(0))) /
+                ((queryFirst.get(0) + querySecond.get(0)) / 2)));
+        firstVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(1) - querySecond.get(1))) /
+                ((queryFirst.get(1) + querySecond.get(1)) / 2)));
+        secondVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(2) - querySecond.get(2))) /
+                ((queryFirst.get(2) + querySecond.get(2)) / 2)));
+        thirdVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(3) - querySecond.get(3))) /
+                ((queryFirst.get(3) + querySecond.get(3)) / 2)));
+        fourthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(4) - querySecond.get(4))) /
+                ((queryFirst.get(4) + querySecond.get(4)) / 2)));
+        fifthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(5) - querySecond.get(5))) /
+                ((queryFirst.get(5) + querySecond.get(5)) / 2)));
+        sixthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+
+        comp.social = new SocialComparison(firstVal, secondVal, thirdVal, fourthVal, fifthVal, sixthVal);
+        comp.social.setAggregateComparison();
+
+        // Calculate health comparisons.
+        queryFirst = Country.getCountriesData(firstCountry).getMetrics(HEALTHINDI);
+        querySecond = Country.getCountriesData(secondCountry).getMetrics(HEALTHINDI);
+
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(0) - querySecond.get(0))) /
+                ((queryFirst.get(0) + querySecond.get(0)) / 2)));
+        firstVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(1) - querySecond.get(1))) /
+                ((queryFirst.get(1) + querySecond.get(1)) / 2)));
+        secondVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(2) - querySecond.get(2))) /
+                ((queryFirst.get(2) + querySecond.get(2)) / 2)));
+        thirdVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(3) - querySecond.get(3))) /
+                ((queryFirst.get(3) + querySecond.get(3)) / 2)));
+        fourthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(4) - querySecond.get(4))) /
+                ((queryFirst.get(4) + querySecond.get(4)) / 2)));
+        fifthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(5) - querySecond.get(5))) /
+                ((queryFirst.get(5) + querySecond.get(5)) / 2)));
+        sixthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+
+        comp.health = new HealthComparison(firstVal, secondVal, thirdVal, fourthVal, fifthVal, sixthVal);
+        comp.health.setAggregateComparison();
+
+        // Calculate economic comparisons.
+        queryFirst = Country.getCountriesData(firstCountry).getMetrics(ECONOMICINDI);
+        querySecond = Country.getCountriesData(secondCountry).getMetrics(ECONOMICINDI);
+
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(0) - querySecond.get(0))) /
+                ((queryFirst.get(0) + querySecond.get(0)) / 2)));
+        firstVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(1) - querySecond.get(1))) /
+                ((queryFirst.get(1) + querySecond.get(1)) / 2)));
+        secondVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(2) - querySecond.get(2))) /
+                ((queryFirst.get(2) + querySecond.get(2)) / 2)));
+        thirdVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(3) - querySecond.get(3))) /
+                ((queryFirst.get(3) + querySecond.get(3)) / 2)));
+        fourthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(4) - querySecond.get(4))) /
+                ((queryFirst.get(4) + querySecond.get(4)) / 2)));
+        fifthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(5) - querySecond.get(5))) /
+                ((queryFirst.get(5) + querySecond.get(5)) / 2)));
+        sixthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+
+        comp.economic = new EconomicComparison(firstVal, secondVal, thirdVal, fourthVal, fifthVal, sixthVal);
+        comp.economic.setAggregateComparison();
+
+        // Calculates pollution comparisons.
+        queryFirst = Country.getCountriesData(firstCountry).getMetrics(POLLUTIONINDI);
+        querySecond = Country.getCountriesData(secondCountry).getMetrics(POLLUTIONINDI);
+
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(0) - querySecond.get(0))) /
+                ((queryFirst.get(0) + querySecond.get(0)) / 2)));
+        firstVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(1) - querySecond.get(1))) /
+                ((queryFirst.get(1) + querySecond.get(1)) / 2)));
+        secondVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(2) - querySecond.get(2))) /
+                ((queryFirst.get(2) + querySecond.get(2)) / 2)));
+        thirdVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(3) - querySecond.get(3))) /
+                ((queryFirst.get(3) + querySecond.get(3)) / 2)));
+        fourthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(4) - querySecond.get(4))) /
+                ((queryFirst.get(4) + querySecond.get(4)) / 2)));
+        fifthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        bd = new BigDecimal(Math.abs(100 * (Math.abs(queryFirst.get(5) - querySecond.get(5))) /
+                ((queryFirst.get(5) + querySecond.get(5)) / 2)));
+        sixthVal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+
+        comp.pollution = new PollutionComparison(firstVal, secondVal, thirdVal, fourthVal, fifthVal, sixthVal);
+        comp.pollution.setAggregateComparison();
+        comp.setCumulativeComparison();
+
+        countryComparisons[countryIndices.get(firstCountry.toLowerCase())]
+                [countryIndices.get(secondCountry.toLowerCase())] = comp;
+
+        countryComparisons[countryIndices.get(secondCountry.toLowerCase())]
+                [countryIndices.get(firstCountry.toLowerCase())] = comp;
+
+        return comp;
     }
 }
