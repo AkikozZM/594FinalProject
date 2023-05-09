@@ -19,7 +19,7 @@ public class Cashe {
         try {
             FileWriter fw = new FileWriter(fileName);
             for (ProcessingData.IndexRanking content : contents) {
-                fw.write(content.getCountry() + " " + content.getIndexValue_roundup() + "\n");
+                fw.write(content.getCountry() + ", " + content.getIndexValue_roundup() + "\n");
             }
             fw.close();
         } catch (IOException e) {
@@ -40,8 +40,8 @@ public class Cashe {
         try (BufferedReader rd = new BufferedReader(new FileReader(fileName))){
             String line;
             while ((line = rd.readLine()) != null) {
-                String[] lines = line.split(" ");
-                System.out.println(lines[0] + ": " + lines[1]);
+                String[] lines = line.split(", ");
+                System.out.println(lines[0].trim() + ": " + lines[1]);
             }
         } catch (IOException e) {
             System.out.println("Error: Reading file fail.");
