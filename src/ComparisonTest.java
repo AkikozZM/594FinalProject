@@ -74,23 +74,26 @@ public class ComparisonTest {
     @Test
     public void generateComparisonTest() {
         ImportInfo ii = new ImportInfo();
-        Menu mn = new Menu();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {
             ii.parseData();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        String[] strings = new String[2];
         Comparison comp = new Comparison();
         Comparison temp = comp.generateComparison("Norway", "Sweden");
         temp.setCumulativeComparison();
         Menu menu = new Menu();
         System.setOut(new PrintStream(out));
+        strings[0] = "Norway";
+        strings[1] = "Japan";
         menu.printComparison(temp, "social");
         menu.printComparison(temp, "health");
         menu.printComparison(temp, "economic");
         menu.printComparison(temp, "pollution");
         menu.viewRankingMethodology();
+        menu.compareTwoCountries(strings, 1);
         assertTrue(out.toString().length() > 100);
 
         assertNotNull(temp);
@@ -105,7 +108,6 @@ public class ComparisonTest {
     @Test
     public void comparisonRankingsTest() {
         ImportInfo ii = new ImportInfo();
-        Menu mn = new Menu();
         try {
             ii.parseData();
         } catch (Exception e) {
@@ -113,10 +115,10 @@ public class ComparisonTest {
         }
         ProcessingData pd = new ProcessingData();
 
-        assertTrue(pd.economicRankingsCalculation().size() == 195);
-        assertTrue(pd.healthRankingsCalculation().size() == 195);
-        assertTrue(pd.pollutionRankingsCalculation().size() == 195);
-        assertTrue(pd.socialRankingsCalculation().size() == 195);
+        assertEquals(195, pd.economicRankingsCalculation().size());
+        assertEquals(195, pd.healthRankingsCalculation().size());
+        assertEquals(195, pd.pollutionRankingsCalculation().size());
+        assertEquals(195, pd.socialRankingsCalculation().size());
 
     }
 }

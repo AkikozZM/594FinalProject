@@ -240,6 +240,10 @@ public class ProcessingData implements Comparator<ProcessingData.IndexRanking> {
     }
 
     /**
+     * Title: Java Geometric Mean geometricMean(double[] values)
+     * Type: Source Code
+     * Availability: http://www.java2s.com/example/java-utility-method/
+     * geometric-mean/geometricmean-double-values-4d7e5.html
      * Computes the geometric mean for an array.
      * @param values  The values to compute.
      * @return  Geometric mean for values.
@@ -260,6 +264,10 @@ public class ProcessingData implements Comparator<ProcessingData.IndexRanking> {
     }
 
     /**
+     * Title: Java Geometric Mean geometricMean(double[] values)
+     * Type: Source Code
+     * Availability: http://www.java2s.com/example/java-utility-method/
+     * geometric-mean/geometricmean-double-values-4d7e5.html
      * Calculates the geometric mean of log values.
      * The geometric mean of logarithmic values is simply the arithmethic mean converted to non-logarithmic values (exponentiated)
      * @param logValues
@@ -273,6 +281,10 @@ public class ProcessingData implements Comparator<ProcessingData.IndexRanking> {
     }
 
     /**
+     * Title: Java Geometric Mean geometricMean(double[] values)
+     * Type: Source Code
+     * Availability: http://www.java2s.com/example/java-utility-method/
+     * geometric-mean/geometricmean-double-values-4d7e5.html
      * calculate the arithmetic mean
      * The arithmetic mean is the sum of all values in the array divided by the total number of values in the array.
      * @param values
@@ -292,6 +304,10 @@ public class ProcessingData implements Comparator<ProcessingData.IndexRanking> {
     }
 
     /**
+     * Title: Java Geometric Mean geometricMean(double[] values)
+     * Type: Source Code
+     * Availability: http://www.java2s.com/example/java-utility-method/
+     * geometric-mean/geometricmean-double-values-4d7e5.html
      * @param values
      *            source of data for summation calculation
      * @return the sum of all values within the array
