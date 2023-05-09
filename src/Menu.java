@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -24,7 +25,9 @@ public class Menu {
             case "2" -> secondMenu("Health");
             case "3" -> secondMenu("Economic");
             case "4" -> secondMenu("Pollution");
-            //case "6" ->
+            case "5" -> System.out.println();
+            case "6" -> System.out.println();
+            case "7" -> System.out.println();
             case "8" -> System.exit(0);
         }
     }
@@ -45,7 +48,67 @@ public class Menu {
         switch (number) {
             case "1" -> viewIndicator(i);
             case "2" -> {
+                Cashe cashe = new Cashe();
                 // wait for display "something's" rankings
+                switch (i) {
+                    case 1 -> {
+                        String filename = "SocialRankings.txt";
+                        if (cashe.checkFile(filename)) {
+                            //System.out.println("true");
+                            ArrayList<String> display = cashe.loadCashe(filename);
+                            cashe.displayAllRankings(display);
+                        } else {
+                            //System.out.println("false");
+                            //Call ranking function
+                            ArrayList<String> save = new ArrayList<>();
+                            //save local
+                            cashe.saveLocal(save , filename);
+                        }
+                    }
+                    case 2 -> {
+                        String filename = "HealthRankings.txt";
+                        if (cashe.checkFile(filename)) {
+                            //System.out.println("true");
+                            ArrayList<String> display = cashe.loadCashe(filename);
+                            cashe.displayAllRankings(display);
+                        } else {
+                            //System.out.println("false");
+                            //Call ranking function
+                            ArrayList<String> save = new ArrayList<>();
+                            //save local
+                            cashe.saveLocal(save , filename);
+                        }
+                    }
+                    case 3 -> {
+                        String filename = "EconomicRankings.txt";
+                        if (cashe.checkFile(filename)) {
+                            //System.out.println("true");
+                            ArrayList<String> display = cashe.loadCashe(filename);
+                            cashe.displayAllRankings(display);
+                        } else {
+                            //System.out.println("false");
+                            //Call ranking function
+                            ArrayList<String> save = new ArrayList<>();
+                            //save local
+                            cashe.saveLocal(save , filename);
+                        }
+                    }
+                    case 4 -> {
+                        String filename = "PollutionRankings.txt";
+                        if (cashe.checkFile(filename)) {
+                            //System.out.println("true");
+                            ArrayList<String> display = cashe.loadCashe(filename);
+                            cashe.displayAllRankings(display);
+                        } else {
+                            //System.out.println("false");
+                            //Call ranking function
+                            ArrayList<String> save = new ArrayList<>();
+                            //save local
+                            cashe.saveLocal(save , filename);
+                        }
+                    }
+                }
+
             }
         }
     }

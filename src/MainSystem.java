@@ -26,7 +26,9 @@ public class MainSystem {
                     //wait for compare nation function to display something
                 }
                 case 6 -> {
+                    System.out.println("Here are all the countries name you can query!");
                     Country.printCountries();
+                    System.out.println();
                 }
                 case 7 -> {
                     //wait for view ranking methodology

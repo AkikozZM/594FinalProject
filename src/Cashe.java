@@ -47,4 +47,18 @@ public class Cashe {
         }
         return ret;
     }
+    public boolean checkFile(String fileName) {
+        String path = "./";
+        File dir = new File(path);
+        File[] fileList = dir.listFiles();
+        for (File f : fileList) {
+            if (f.getName().equals(fileName)) return true;
+        }
+        return false;
+    }
+    public void displayAllRankings(ArrayList<String> display) {
+        for (String s : display) {
+            System.out.println(s);
+        }
+    }
 }
