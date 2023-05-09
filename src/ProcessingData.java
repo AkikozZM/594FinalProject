@@ -114,10 +114,26 @@ public class ProcessingData implements Comparator<ProcessingData.IndexRanking> {
     }
     public class IndexRanking {
         Double indexValue;
+        String indexValue_roundup;
         String country;
         public IndexRanking(Double idx, String country) {
             this.indexValue = idx;
             this.country = country;
+            DecimalFormat df = new DecimalFormat("#.##");
+            df.setRoundingMode(RoundingMode.CEILING);
+            this.indexValue_roundup = df.format(indexValue);
+        }
+
+        public String getIndexValue_roundup() {
+            return indexValue_roundup;
+        }
+
+        public Double getIndexValue() {
+            return indexValue;
+        }
+
+        public String getCountry() {
+            return country;
         }
     }
 

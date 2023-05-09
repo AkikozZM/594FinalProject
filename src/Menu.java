@@ -49,64 +49,51 @@ public class Menu {
             case "1" -> viewIndicator(i);
             case "2" -> {
                 Cashe cashe = new Cashe();
+                ProcessingData pd = new ProcessingData();
                 // wait for display "something's" rankings
                 switch (i) {
                     case 1 -> {
                         String filename = "SocialRankings.txt";
                         if (cashe.checkFile(filename)) {
-                            //System.out.println("true");
-                            ArrayList<String> display = cashe.loadCashe(filename);
-                            cashe.displayAllRankings(display);
+                            ArrayList<ProcessingData.IndexRanking> display = cashe.loadCashe(filename);
+                            //cashe.displayAllRankings(display);
                         } else {
-                            //System.out.println("false");
-                            //Call ranking function
-                            ArrayList<String> save = new ArrayList<>();
-                            //save local
+                            ArrayList<ProcessingData.IndexRanking> save = pd.socialRankingsCalculation();
                             cashe.saveLocal(save , filename);
+                            cashe.displayAllRankings(save);
                         }
                     }
                     case 2 -> {
                         String filename = "HealthRankings.txt";
                         if (cashe.checkFile(filename)) {
-                            //System.out.println("true");
-                            ArrayList<String> display = cashe.loadCashe(filename);
-                            cashe.displayAllRankings(display);
+                            ArrayList<ProcessingData.IndexRanking> display = cashe.loadCashe(filename);
+                            //cashe.displayAllRankings(display);
                         } else {
-                            //System.out.println("false");
-                            //Call ranking function
-                            ArrayList<String> save = new ArrayList<>();
-                            //save local
+                            ArrayList<ProcessingData.IndexRanking> save = pd.healthRankingsCalculation();
                             cashe.saveLocal(save , filename);
+                            cashe.displayAllRankings(save);
                         }
-
                     }
                     case 3 -> {
                         String filename = "EconomicRankings.txt";
                         if (cashe.checkFile(filename)) {
-                            //System.out.println("true");
-                            ArrayList<String> display = cashe.loadCashe(filename);
-                            cashe.displayAllRankings(display);
+                            ArrayList<ProcessingData.IndexRanking> display = cashe.loadCashe(filename);
+                            //cashe.displayAllRankings(display);
                         } else {
-                            //System.out.println("false");
-                            //Call ranking function
-                            ArrayList<String> save = new ArrayList<>();
-                            //save local
+                            ArrayList<ProcessingData.IndexRanking> save = pd.economicRankingsCalculation();
                             cashe.saveLocal(save , filename);
+                            cashe.displayAllRankings(save);
                         }
-
                     }
                     case 4 -> {
                         String filename = "PollutionRankings.txt";
                         if (cashe.checkFile(filename)) {
-                            //System.out.println("true");
-                            ArrayList<String> display = cashe.loadCashe(filename);
-                            cashe.displayAllRankings(display);
+                            ArrayList<ProcessingData.IndexRanking> display = cashe.loadCashe(filename);
+                            //cashe.displayAllRankings(display);
                         } else {
-                            //System.out.println("false");
-                            //Call ranking function
-                            ArrayList<String> save = new ArrayList<>();
-                            //save local
+                            ArrayList<ProcessingData.IndexRanking> save = pd.pollutionRankingsCalculation();
                             cashe.saveLocal(save , filename);
+                            cashe.displayAllRankings(save);
                         }
                     }
                 }

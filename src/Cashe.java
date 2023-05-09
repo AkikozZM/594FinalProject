@@ -14,12 +14,12 @@ public class Cashe {
      *                 The File must end with .txt, ow it will return false.
      * @return True, if save success, ow false.
      */
-    public boolean saveLocal(ArrayList<String> contents, String fileName) {
+    public boolean saveLocal(ArrayList<ProcessingData.IndexRanking> contents, String fileName) {
         if (!fileName.endsWith(".txt")) return false;
         try {
             FileWriter fw = new FileWriter(fileName);
-            for (String content : contents) {
-                fw.write(content + "\n");
+            for (ProcessingData.IndexRanking content : contents) {
+                fw.write(content.getCountry() + " " + content.getIndexValue_roundup() + "\n");
             }
             fw.close();
         } catch (IOException e) {
@@ -35,12 +35,13 @@ public class Cashe {
      * @param fileName File to load.
      * @return an ArrayList for country's ranking
      */
-    public ArrayList<String> loadCashe(String fileName) {
-        ArrayList<String> ret = new ArrayList<>();
+    public ArrayList<ProcessingData.IndexRanking> loadCashe(String fileName) {
+        ArrayList<ProcessingData.IndexRanking> ret = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(fileName))){
             String line;
             while ((line = rd.readLine()) != null) {
-                ret.add(line);
+                String[] lines = line.split(" ");
+                System.out.println(lines[0] + ": " + lines[1]);
             }
         } catch (IOException e) {
             System.out.println("Error: Reading file fail.");
@@ -56,9 +57,9 @@ public class Cashe {
         }
         return false;
     }
-    public void displayAllRankings(ArrayList<String> display) {
-        for (String s : display) {
-            System.out.println(s);
+    public void displayAllRankings(ArrayList<ProcessingData.IndexRanking> display) {
+        for (ProcessingData.IndexRanking s : display) {
+            System.out.println(s.getCountry() + ": " + s.getIndexValue_roundup());
         }
     }
 }
