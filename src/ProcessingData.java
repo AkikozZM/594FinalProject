@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -58,19 +57,42 @@ public class ProcessingData {
     }
     private Double calcSocial(Double[] data) {
         // to be implemented
-        return null;
+        double hdi = 1;
+        for (int i = 0; i < data.length; ++i) {
+            hdi *= data[i];
+        }
+        hdi = Math.pow(hdi, 1 / (double) data.length);
+        return hdi;
     }
     private Double calcHealth(Double[] data) {
         // to be implemented
-        return null;
+        double hdi = 1;
+        for (int i = 0; i < data.length; ++i) {
+            if (i >= 2) hdi *= 1 - data[i];
+            else hdi *= data[i];
+        }
+        hdi = Math.pow(hdi, 1 / (double) data.length);
+        return hdi;
     }
     private Double calcEcon(Double[] data) {
         // to be implemented
-        return null;
+        double hdi = 1;
+        for (int i = 0; i < data.length; ++i) {
+            if (i == 2 || i == 4 || i == 5) hdi *= 1 - data[i];
+            else hdi *= data[i];
+        }
+        hdi = Math.pow(hdi, 1 / (double) data.length);
+        return hdi;
     }
     private Double calcPoll(Double[] data) {
         // to be implemented
-        return null;
+        double hdi = 1;
+        for (int i = 0; i < data.length; ++i) {
+            if (i > 0) hdi *= 1 - data[i];
+            else hdi *= data[i];
+        }
+        hdi = Math.pow(hdi, 1 / (double) data.length);
+        return hdi;
     }
     private class Tuple {
         String name;
