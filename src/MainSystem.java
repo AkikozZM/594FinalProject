@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class MainSystem {
 
-
     public static void main(String args[]) throws Exception {
         ImportInfo ii = new ImportInfo();
         Menu mn = new Menu();
