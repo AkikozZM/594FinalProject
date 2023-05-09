@@ -20,13 +20,22 @@ public class Country {
     public static Country getCountriesData(String countryName) {
         return countriesData.get(countryName);
     }
-    public List<Double> getMetrics(String[] queryTerms) {
-        List<Double> ret = new ArrayList<>();
-        for (String query : queryTerms) {
-            ret.add(met.getMetric(query));
+    public static String[] getCountries() {
+        return countriesData.keySet().toArray(new String[0]);
+    }
+    public static void printCountries() {
+        for (String i : getCountries()) {
+            System.out.println(i);
+        }
+    }
+    public Double[] getMetrics(String[] queryTerms) {
+        Double[] ret = new Double[queryTerms.length];
+        for (int i = 0; i < queryTerms.length; ++i) {
+            ret[i] = met.getMetric(queryTerms[i]);
         }
         return ret;
     }
+
     @Override
     public String toString() {
         return countryName + ":\n " + met.toString();
