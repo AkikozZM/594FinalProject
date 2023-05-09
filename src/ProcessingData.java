@@ -1,4 +1,3 @@
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -295,11 +294,8 @@ public class ProcessingData implements Comparator<ProcessingData.IndexRanking> {
         double arithmeticMean;
 
         int size = values.length;
-
         double sum = summation(values);
-
         arithmeticMean = sum / size;
-
         return arithmeticMean;
     }
 
