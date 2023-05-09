@@ -30,6 +30,7 @@ public class MainSystem {
             mainMenuSwitch(input);
             input = getUserInput(sc);
             secondMenuSwitch(input);
+
             //not yet finish wait for sorting and ranking functions.
         }
     }

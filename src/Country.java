@@ -20,6 +20,9 @@ public class Country {
     public static Country getCountriesData(String countryName) {
         return countriesData.get(countryName);
     }
+    public static String[] getCountries() {
+        return countriesData.keySet().toArray(new String[0]);
+    }
     public List<Double> getMetrics(String[] queryTerms) {
         List<Double> ret = new ArrayList<>();
         for (String query : queryTerms) {
@@ -27,6 +30,7 @@ public class Country {
         }
         return ret;
     }
+
     @Override
     public String toString() {
         return countryName + ":\n " + met.toString();
