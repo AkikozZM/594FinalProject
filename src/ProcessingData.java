@@ -137,7 +137,7 @@ public class ProcessingData implements Comparator<ProcessingData.IndexRanking> {
             this.indicator_roundup = df.format(indicator);
         }
     }
-    public class IndexRanking {
+    public static class IndexRanking {
         Double indexValue;
         String indexValue_roundup;
         String country;

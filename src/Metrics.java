@@ -11,7 +11,7 @@ public class Metrics {
 
     /**
      * input
-     * @param vals
+     * @param vals  Metrics to return.
      */
     public Metrics(Double[] vals) {
         if (KEYS.length != vals.length) {

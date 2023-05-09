@@ -1,0 +1,5 @@
+USA, 1.1
+Norway, 1.5
+Switzerland, 2.5
+Denmark, 4.7
+Germany, 7.8

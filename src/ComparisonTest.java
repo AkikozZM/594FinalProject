@@ -94,6 +94,18 @@ public class ComparisonTest {
         menu.printComparison(temp, "pollution");
         menu.viewRankingMethodology();
         menu.compareTwoCountries(strings, 1);
+        menu.mainMenuSwitch("1");
+        menu.mainMenuSwitch("2");
+        menu.mainMenuSwitch("3");
+        menu.mainMenuSwitch("4");
+        menu.mainMenuSwitch("5");
+        menu.mainMenuSwitch("6");
+        menu.mainMenuSwitch("7");
+        menu.menuDisplay();
+        menu.secondMenuSwitch("2", 1);
+        menu.secondMenuSwitch("2", 2);
+        menu.secondMenuSwitch("2", 3);
+        menu.secondMenuSwitch("2", 4);
         assertTrue(out.toString().length() > 100);
 
         assertNotNull(temp);
@@ -119,6 +131,5 @@ public class ComparisonTest {
         assertEquals(195, pd.healthRankingsCalculation().size());
         assertEquals(195, pd.pollutionRankingsCalculation().size());
         assertEquals(195, pd.socialRankingsCalculation().size());
-
     }
 }

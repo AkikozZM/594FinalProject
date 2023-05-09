@@ -1,7 +1,5 @@
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -202,7 +200,7 @@ public class Comparison {
 
         /**
          * Getter for nutrional deficiencies comparison value.
-         * @return
+         * @return Nutrion comparison.
          */
         public Double getNutrition() {
             return nutrition;
