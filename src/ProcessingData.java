@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -64,40 +65,64 @@ public class ProcessingData implements Comparator<ProcessingData.IndexRanking> {
     private Double calcSocial(Double[] data) {
         // to be implemented
         double hdi = 1;
+        Double[] vals = new Double[6];
+
         for (int i = 0; i < data.length; ++i) {
+            vals[i] = data[i];
             hdi *= data[i];
         }
-        hdi = Math.pow(hdi, 1 / (double) data.length);
+        hdi = geometricMean(vals);
         return hdi;
     }
     private Double calcHealth(Double[] data) {
         // to be implemented
         double hdi = 1;
+        Double[] vals = new Double[6];
+
         for (int i = 0; i < data.length; ++i) {
-            if (i >= 2) hdi *= 1 - data[i];
-            else hdi *= data[i];
+            if (i >= 2) {
+                vals[i] = Math.abs(1 - data[i]);
+                hdi *= 1 - data[i];
+            } else {
+                vals[i] = data[i];
+                hdi *= data[i];
+            }
         }
-        hdi = Math.pow(hdi, 1 / (double) data.length);
+        hdi = geometricMean(vals);
         return hdi;
     }
     private Double calcEcon(Double[] data) {
         // to be implemented
         double hdi = 1;
+        Double[] vals = new Double[6];
+
         for (int i = 0; i < data.length; ++i) {
-            if (i == 2 || i == 4 || i == 5) hdi *= 1 - data[i];
-            else hdi *= data[i];
+            if (i == 2 || i == 4 || i == 5) {
+                hdi *= 1 - data[i];
+                vals[i] = Math.abs(1 - data[i]);
+            } else {
+                hdi *= data[i];
+                vals[i] = data[i];
+            }
         }
-        hdi = Math.pow(hdi, 1 / (double) data.length);
+        hdi = geometricMean(vals);
         return hdi;
     }
     private Double calcPoll(Double[] data) {
         // to be implemented
         double hdi = 1;
+        Double[] vals = new Double[6];
+
         for (int i = 0; i < data.length; ++i) {
-            if (i > 0) hdi *= 1 - data[i];
-            else hdi *= data[i];
+            if (i > 0) {
+                vals[i] = Math.abs(1 - data[i]);
+                hdi *= 1 - data[i];
+            } else {
+                vals[i] = data[i];
+                hdi *= data[i];
+            }
         }
-        hdi = Math.pow(hdi, 1 / (double) data.length);
+        hdi = geometricMean(vals);
         return hdi;
     }
     private class Tuple {
@@ -210,11 +235,79 @@ public class ProcessingData implements Comparator<ProcessingData.IndexRanking> {
         Collections.sort(pollution, new ProcessingData());
 
         for (IndexRanking idx : pollution) {
-            System.out.println(idx.country);
+            System.out.println(idx.country + "   IDX Value: " + idx.indexValue);
         }
 
         this.pollutionRankings = pollution;
 
         return pollution;
+    }
+
+    /**
+     * Computes the geometric mean for an array.
+     * @param values  The values to compute.
+     * @return  Geometric mean for values.
+     */
+    public static double geometricMean(Double[] values) {
+        double geometricMean;
+
+        int size = values.length;
+
+        double[] logValues = new double[size];
+        for (int i = 0; i < size; i++) {
+            logValues[i] = Math.log(values[i]);
+        }
+
+        geometricMean = geometricMeanFromLog(logValues);
+
+        return geometricMean;
+    }
+
+    /**
+     * Calculates the geometric mean of log values.
+     * The geometric mean of logarithmic values is simply the arithmethic mean converted to non-logarithmic values (exponentiated)
+     * @param logValues
+     *            array of values in logarithmic form
+     * @return geometric mean
+     */
+    public static double geometricMeanFromLog(double[] logValues) {
+        double logArithmeticMean = arithmeticMean(logValues);
+        double geometricMean = Math.exp(logArithmeticMean);
+        return geometricMean;
+    }
+
+    /**
+     * calculate the arithmetic mean
+     * The arithmetic mean is the sum of all values in the array divided by the total number of values in the array.
+     * @param values
+     *            source of data for mean calculation
+     * @return arithmetic mean
+     */
+    public static double arithmeticMean(double[] values) {
+        double arithmeticMean;
+
+        int size = values.length;
+
+        double sum = summation(values);
+
+        arithmeticMean = sum / size;
+
+        return arithmeticMean;
+    }
+
+    /**
+     * @param values
+     *            source of data for summation calculation
+     * @return the sum of all values within the array
+     */
+    public static double summation(double[] values) {
+        double sum = 0.0;
+        int size = values.length;
+
+        for (int i = 0; i < size; i++) {
+            sum += values[i];
+        }
+
+        return sum;
     }
 }
