@@ -88,7 +88,22 @@ public class ComparisonTest {
         assertTrue(temp.getEconomic().getAggregateComparison() > 0);
         assertTrue(temp.getHealth().getAggregateComparison() > 0);
         assertTrue(temp.getSocial().getAggregateComparison() > 0);
+    }
 
+    @Test
+    public void comparisonRankingsTest() {
+        ImportInfo ii = new ImportInfo();
+        Menu mn = new Menu();
+        try {
+            ii.parseData();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        ProcessingData pd = new ProcessingData();
 
+        assertTrue(pd.economicRankingsCalculation().size() == 195);
+        assertTrue(pd.healthRankingsCalculation().size() == 195);
+        assertTrue(pd.pollutionRankingsCalculation().size() == 195);
+        assertTrue(pd.socialRankingsCalculation().size() == 195);
     }
 }
