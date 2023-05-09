@@ -23,6 +23,11 @@ public class Country {
     public static String[] getCountries() {
         return countriesData.keySet().toArray(new String[0]);
     }
+    public static void printCountries() {
+        for (String i : getCountries()) {
+            System.out.println(i);
+        }
+    }
     public List<Double> getMetrics(String[] queryTerms) {
         List<Double> ret = new ArrayList<>();
         for (String query : queryTerms) {
