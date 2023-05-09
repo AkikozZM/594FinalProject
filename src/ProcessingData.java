@@ -1,5 +1,13 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class is a utility class used to fetch corresponding indicator data
+ * e.g. we would like to know the social indicator of China, we call calcIndicator(countryName, 1)
+ * to get the value
+ */
 public class ProcessingData {
     private static final String[] SOCIALINDI = new String[]{"Happiness Ladder Score",
             "Gender Development Index", "Expected Years of Education", "Freedom to Make Life Choices",
@@ -13,16 +21,25 @@ public class ProcessingData {
             "Pollution Deaths per 100k", "CO2 from Coal",
             "CO2 from Oil", "CO2 from Gas", "Total CO2 Emissions"};
 
-    void sortRank() {
 
+    public void displayIndicator(String[] countries, int option) {
+        List<Tuple> info = new ArrayList<>();
+        for (String country : countries) {
+            info.add(new Tuple(country, calcIndicator(country, option)));
+        }
+        Collections.sort(info, (a, b)->a.indicator.compareTo(b.indicator));
+        for (Tuple i : info) {
+            System.out.println(i.name + ": " + i.indicator);
+        }
     }
 
-    String printResult() {
+    public Double calcIndicator(String countryName, int option) {
+        Double[] data = findIndicatorElement(countryName, option);
+        // to be implemented
+
         return null;
     }
-
-
-    private List<Double> calcIndicator(String countryName, int option) {
+    private Double[] findIndicatorElement(String countryName, int option) {
         String[] queryTerms = new String[0];
         Country query = Country.getCountriesData(countryName);
         switch (option) {
@@ -33,4 +50,14 @@ public class ProcessingData {
         }
         return query.getMetrics(queryTerms);
     }
+
+    private class Tuple {
+        String name;
+        Double indicator;
+        public Tuple(String name, Double indicator) {
+            this.name = name;
+            this.indicator = indicator;
+        }
+    }
+
 }

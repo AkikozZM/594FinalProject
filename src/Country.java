@@ -28,10 +28,10 @@ public class Country {
             System.out.println(i);
         }
     }
-    public List<Double> getMetrics(String[] queryTerms) {
-        List<Double> ret = new ArrayList<>();
-        for (String query : queryTerms) {
-            ret.add(met.getMetric(query));
+    public Double[] getMetrics(String[] queryTerms) {
+        Double[] ret = new Double[queryTerms.length];
+        for (int i = 0; i < queryTerms.length; ++i) {
+            ret[i] = met.getMetric(queryTerms[i]);
         }
         return ret;
     }
