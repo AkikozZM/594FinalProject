@@ -144,4 +144,17 @@ public class Menu {
         pd.displayIndicator(countries, i);
 
     }
+
+    public void viewRankingMethodology() {
+        System.out.println("\nRanking and Comparison Methodology\n");
+
+        System.out.println("Aggregate indicator rankings are calculated using a geometric mean(equally weighted)\n" +
+                "of each individual data point within the categorical collection of indicators.\n\n" +
+                "The geometric mean provides better estimation for data sets where results tend \n" +
+                "to be more skewed and where the individual data points are dependent on each other.\n");
+
+        System.out.println("For the comparison statistics we have provided differential values that represent how\n"
+                + "different each country is in terms of a percentage. These values are calculated using the \n"
+                + "absolute value of the ratio of the difference in two values to their average multiplied by 100.");
+    }
 }
