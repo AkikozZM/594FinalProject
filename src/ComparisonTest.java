@@ -1,5 +1,8 @@
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.Assert.*;
 
 /**
@@ -72,6 +75,7 @@ public class ComparisonTest {
     public void generateComparisonTest() {
         ImportInfo ii = new ImportInfo();
         Menu mn = new Menu();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {
             ii.parseData();
         } catch (Exception e) {
@@ -80,6 +84,14 @@ public class ComparisonTest {
         Comparison comp = new Comparison();
         Comparison temp = comp.generateComparison("Norway", "Sweden");
         temp.setCumulativeComparison();
+        Menu menu = new Menu();
+        System.setOut(new PrintStream(out));
+        menu.printComparison(temp, "social");
+        menu.printComparison(temp, "health");
+        menu.printComparison(temp, "economic");
+        menu.printComparison(temp, "pollution");
+        menu.viewRankingMethodology();
+        assertTrue(out.toString().length() > 100);
 
         assertNotNull(temp);
         assertTrue(temp.getCumulativeComparison() > 0);
@@ -105,5 +117,6 @@ public class ComparisonTest {
         assertTrue(pd.healthRankingsCalculation().size() == 195);
         assertTrue(pd.pollutionRankingsCalculation().size() == 195);
         assertTrue(pd.socialRankingsCalculation().size() == 195);
+
     }
 }
