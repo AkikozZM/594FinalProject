@@ -35,9 +35,15 @@ public class ProcessingData {
 
     public Double calcIndicator(String countryName, int option) {
         Double[] data = findIndicatorElement(countryName, option);
+        Double res = (double) 0;
         // to be implemented
-
-        return null;
+        switch (option) {
+            case 1 -> res = calcSocial(data);
+            case 2 -> res = calcHealth(data);
+            case 3 -> res = calcEcon(data);
+            case 4 -> res = calcPoll(data);
+        }
+        return res;
     }
     private Double[] findIndicatorElement(String countryName, int option) {
         String[] queryTerms = new String[0];
@@ -50,7 +56,22 @@ public class ProcessingData {
         }
         return query.getMetrics(queryTerms);
     }
-
+    private Double calcSocial(Double[] data) {
+        // to be implemented
+        return null;
+    }
+    private Double calcHealth(Double[] data) {
+        // to be implemented
+        return null;
+    }
+    private Double calcEcon(Double[] data) {
+        // to be implemented
+        return null;
+    }
+    private Double calcPoll(Double[] data) {
+        // to be implemented
+        return null;
+    }
     private class Tuple {
         String name;
         Double indicator;
