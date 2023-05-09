@@ -78,6 +78,7 @@ public class Menu {
                             //save local
                             cashe.saveLocal(save , filename);
                         }
+
                     }
                     case 3 -> {
                         String filename = "EconomicRankings.txt";
@@ -92,6 +93,7 @@ public class Menu {
                             //save local
                             cashe.saveLocal(save , filename);
                         }
+
                     }
                     case 4 -> {
                         String filename = "PollutionRankings.txt";
@@ -123,5 +125,23 @@ public class Menu {
         System.out.println("The country: " + country + " indicators index is as followed: ");
         pd.displayIndicator(countries, i);
         System.out.println();
+    }
+
+    public void compareNations(){
+        System.out.println("1. Query a country.");
+        System.out.println("2. View List of Countries.");
+        System.out.println("3. View Ranking Methodology.");
+        System.out.println("4. Return home.");
+    }
+    public void displayCompareNations() {
+        System.out.println("1. Compare Social Indicators");
+        System.out.println("2. Compare Health Indicators");
+        System.out.println("3. Compare Economic Indicators");
+        System.out.println("4. Compare Pollution Indicators");
+    }
+    public void compareTwoCountries(String[] countries, int i) {
+        ProcessingData pd = new ProcessingData();
+        pd.displayIndicator(countries, i);
+
     }
 }

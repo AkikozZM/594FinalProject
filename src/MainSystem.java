@@ -24,6 +24,44 @@ public class MainSystem {
                 }
                 case 5 -> {
                     //wait for compare nation function to display something
+                    System.out.println("Please choose an option: ");
+                    mn.compareNations();
+                    input = mn.getUserInput(sc);
+                    switch (input) {
+                        case "1" -> {
+                            //query a country
+                            mn.displayCompareNations();
+                            input = mn.getUserInput(sc);
+                            switch (input) {
+                                case "1" -> {
+                                    System.out.println("Please enter two countries name, ex: Norway, Germany");
+                                    String[] twoCountries = mn.getUserInput(sc).split(", ");
+                                    mn.compareTwoCountries(twoCountries, 1);
+                                }
+                                case "2" -> {
+                                    System.out.println("Please enter two countries name, ex: Norway, Germany");
+                                    String[] twoCountries = mn.getUserInput(sc).split(", ");
+                                    mn.compareTwoCountries(twoCountries, 2);
+                                }
+                                case "3" -> {
+                                    System.out.println("Please enter two countries name, ex: Norway, Germany");
+                                    String[] twoCountries = mn.getUserInput(sc).split(", ");
+                                    mn.compareTwoCountries(twoCountries, 3);
+                                }
+                                case "4" -> {
+                                    System.out.println("Please enter two countries name, ex: Norway, Germany");
+                                    String[] twoCountries = mn.getUserInput(sc).split(", ");
+                                    mn.compareTwoCountries(twoCountries, 4);
+                                }
+                            }
+                        }
+                        case "2" -> {
+                            Country.printCountries();
+                        }
+                        case "3" -> {
+
+                        }
+                    }
                 }
                 case 6 -> {
                     System.out.println("Here are all the countries name you can query!");
